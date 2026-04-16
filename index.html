@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy Eid 🌙</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- Full-screen scene wrapper -->
+  <div id="scene">
+
+    <!-- Sky layer -->
+    <div id="sky"></div>
+
+    <!-- Clouds layer -->
+    <div id="clouds-layer">
+      <img src="assets/cloud.png" alt="" class="cloud cloud-1" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-2" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-3" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-4" />
+    </div>
+
+    <!-- Ground layer -->
+    <div id="ground">
+      <img src="assets/ground.png" alt="ground" />
+    </div>
+
+    <!-- Character -->
+    <div id="character-wrap">
+      <img id="character" src="assets/me_front.png" alt="Character" />
+    </div>
+
+    <!-- Dialogue Box -->
+    <div id="dialogue-box">
+      <p id="dialogue-text"></p>
+      <button id="next-btn">Next ›</button>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
