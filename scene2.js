@@ -296,6 +296,7 @@ function endScene() {
   scene.addEventListener('animationend', () => {
     console.log('Scene 2 complete');
     // TODO: window.location.href = 'scene3.html';
+    window.location.href = 'scene3.html';
   }, { once: true });
 }
 

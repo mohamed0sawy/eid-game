@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scene 3 — The Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="scene3.css" />
+</head>
+<body>
+
+  <div id="scene">
+
+    <!-- Sky -->
+    <div id="sky"></div>
+
+    <!-- Clouds -->
+    <div id="clouds-layer">
+      <img src="assets/cloud.png" alt="" class="cloud cloud-1" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-2" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-3" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-4" />
+    </div>
+
+    <!-- Ground -->
+    <div id="ground">
+      <img src="assets/ground.png" alt="ground" />
+    </div>
+
+    <!-- ── Characters ── -->
+
+    <!-- Fiancée — far left -->
+    <div id="fiancee-wrap">
+      <img id="fiancee" src="assets/fiancee_thinking.png" alt="Fiancée" />
+    </div>
+
+    <!-- Sheep — right -->
+    <div id="sheep-wrap">
+      <img id="sheep" src="assets/sheep_professor.png" alt="Professor Sheep" />
+    </div>
+
+    <!-- Sheep speech bubble (Question label) -->
+    <div id="bubble-sheep" class="speech-bubble hidden">
+      <p id="sheep-label"></p>
+    </div>
+
+    <!-- ── Quiz Panel (center, floating above ground) ── -->
+    <div id="quiz-panel">
+
+      <!-- Progress bar -->
+      <div id="progress-wrap">
+        <div id="progress-bar"><div id="progress-fill"></div></div>
+        <span id="progress-label">Question 1 / 15</span>
+      </div>
+
+      <!-- Question text -->
+      <p id="question-text"></p>
+
+      <!-- Choices -->
+      <div id="choices-wrap"></div>
+
+      <!-- Feedback -->
+<!--      <div id="feedback" class="hidden"></div>-->
+
+      <!-- Final input (Q14) -->
+      <div id="final-wrap" class="hidden">
+        <p id="final-intro-1">"This is not really a question…"</p>
+        <p id="final-intro-2">"Write what you feel right now ❤️"</p>
+        <textarea id="final-input" placeholder="Type here..." rows="4"></textarea>
+        <button id="submit-btn">Submit</button>
+      </div>
+
+      <!-- Post-submit message -->
+      <div id="post-submit" class="hidden">
+        <p id="post-msg-1"></p>
+        <p id="post-msg-2" class="hidden"></p>
+        <button id="copy-btn" class="hidden">📋 Copy Message</button>
+        <span id="copied-label" class="hidden">✅ Copied!</span>
+      </div>
+
+    </div><!-- /quiz-panel -->
+
+  </div><!-- /scene -->
+
+  <script src="scene3.js"></script>
+</body>
+</html>
