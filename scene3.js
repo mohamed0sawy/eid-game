@@ -31,7 +31,7 @@ const questions = [
     correctIndex: 1
   },
   {
-    text: "What is Mohamed's favorite color? 🎨",
+    text: "What is Mohamed's favorite color?",
     choices: ["Red & Green 🔴🟢", "Blue & Brown 🔵🟤", "Blue & Black 🔵⚫"],
     correctIndex: 2
   },
@@ -52,7 +52,7 @@ const questions = [
   },
   {
     text: "Compared to you, Mohamed prefers…",
-    choices: ["Sleeping more 😴", "Staying awake more 😎", "Same as her"],
+    choices: ["Sleeping more 😴", "Staying awake more 😎", "Same as me"],
     correctIndex: 1
   },
   {
@@ -66,7 +66,7 @@ const questions = [
     correctIndex: 0
   },
   {
-    text: "If it's Eid… what should you do first? 😏",
+    text: "If it's Eid… what should you do first?",
     choices: ["Eat sweets 🍪", "Enjoy the day 🎉", "Both of course 😄"],
     correctIndex: 2
   },
@@ -76,7 +76,7 @@ const questions = [
     correctIndex: 2
   },
   {
-    text: "يعنى جوبتى غلط واعترفتى.. طيب ليكى فرصة تانية <br> Answer honestly 😌",
+    text: "يعنى جوبتى غلط واعترفتى.. ليكى فرصة تانية <br> Answer honestly 😌",
     choices: ["Mohamed is always right", "Sometimes Mohamed is right", "I will not admit anything"],
     correctIndex: 0
   }
@@ -285,7 +285,7 @@ function showFinalInput() {
   progressLabel.textContent   = 'Final Question ❤️';
 
   // Update sheep label
-  setSheepLabel('Last one… ❤️');
+  setSheepLabel('Last one…');
 
   // Reset fiancée to thinking
   setFiancee('thinking');
@@ -322,7 +322,7 @@ submitBtn.addEventListener('click', () => {
 
   // Show post-submit area
   postSubmit.classList.remove('hidden');
-  postMsg1.textContent = 'Hmm… interesting 😏';
+  postMsg1.textContent = 'Hmm… interesting';
   postMsg1.classList.remove('hidden');
   postMsg2.classList.add('hidden');
   copyBtn.classList.add('hidden');
@@ -365,7 +365,7 @@ function showScoreAndEnd() {
   setSheepLabel(`You answered ${score} out of ${TOTAL_MCQ} correct… not bad 😏`);
 
   // Fade out after 3 seconds
-  setTimeout(() => endScene(), 3000);
+  setTimeout(() => endScene(), 4500);
 }
 
 function endScene() {

@@ -49,7 +49,7 @@ const STEPS = [
     type:      'dialogue',
     speaker:   'sheep',
     fianceeImg:'nervous',
-    text:      "Welcome! I am Professor Sheep 🐑🎓",
+    text:      "Welcome! I am Professor Sheep",
   },
   {
     type:      'dialogue',
