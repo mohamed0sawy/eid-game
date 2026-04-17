@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scene 2 — Professor Sheep</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="scene2.css" />
+</head>
+<body>
+
+  <div id="scene">
+
+    <!-- Sky -->
+    <div id="sky"></div>
+
+    <!-- Clouds (identical to scene 1) -->
+    <div id="clouds-layer">
+      <img src="assets/cloud.png" alt="" class="cloud cloud-1" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-2" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-3" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-4" />
+    </div>
+
+    <!-- Ground -->
+    <div id="ground">
+      <img src="assets/ground.png" alt="ground" />
+    </div>
+
+    <!-- Fiancée — far left -->
+    <div id="fiancee-wrap">
+<!--        Replace the placeholder div below with:-->
+        <img id="fiancee" src="assets/fiancee_smile_right.png" alt="Fiancée" />
+<!--      <div id="fiancee-placeholder" class="char-placeholder fiancee-ph"></div>-->
+    </div>
+
+    <!-- Speech bubble — Fiancée -->
+    <div id="bubble-fiancee" class="speech-bubble hidden">
+      <p class="bubble-text" id="text-fiancee"></p>
+      <button class="next-btn" id="next-btn-fiancee">Next ›</button>
+    </div>
+
+    <!-- Sheep — starts off-screen right -->
+    <div id="sheep-wrap">
+<!--        Replace the placeholder div below with:-->
+        <img id="sheep" src="assets/sheep_professor.png" alt="Professor Sheep" />
+<!--      <div id="sheep-placeholder" class="char-placeholder sheep-ph"></div>-->
+    </div>
+
+    <!-- Speech bubble — Sheep -->
+    <div id="bubble-sheep" class="speech-bubble hidden">
+      <p class="bubble-text" id="text-sheep"></p>
+      <button class="next-btn" id="next-btn-sheep">Next ›</button>
+    </div>
+
+  </div>
+
+  <script src="scene2.js"></script>
+</body>
+</html>

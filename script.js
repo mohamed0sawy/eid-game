@@ -132,6 +132,7 @@ function endScene() {
 
   scene.addEventListener('animationend', () => {
     console.log('Scene 1 complete — Mariam scene finished');
+    window.location.href = 'scene2.html';
   }, { once: true });
 }
 
