@@ -6,52 +6,52 @@
 // ── Questions ─────────────────────────────────
 const questions = [
   {
-    text: "What does she love to drink after meals?",
+    text: "What does you love to drink after meals?",
     choices: ["Juice 🧃", "Tea or Nescafe ☕", "Water 💧"],
     correctIndex: 1
   },
   {
-    text: "How does she like her tea? 🍵",
+    text: "How does you like your tea? 🍵",
     choices: ["Light with no sugar", "Very light with a lot of sugar", "Heavy with one spoon of sugar"],
     correctIndex: 2
   },
   {
-    text: "What happens when she gets very hungry?",
+    text: "What happens when you gets very hungry?",
     choices: ["Becomes very active 💪", "dizzy, and in a bad mood 😤", "Starts laughing 😂"],
     correctIndex: 1
   },
   {
-    text: "What does she prefer more?",
+    text: "What does you prefer more?",
     choices: ["Sleeping more 😴", "Waking up early 🌅", "Both equally"],
     correctIndex: 0
   },
   {
-    text: "What is her profession?",
+    text: "What is your profession?",
     choices: ["Engineer 💻", "Pharmacist 💊", "Teacher 📚"],
     correctIndex: 1
   },
   {
-    text: "What is his favorite color? 🎨",
-    choices: ["Red 🔴", "Green 🟢", "Blue 🔵"],
+    text: "What is Mohamed's favorite color? 🎨",
+    choices: ["Red & Green 🔴🟢", "Blue & Brown 🔵🟤", "Blue & Black 🔵⚫"],
     correctIndex: 2
   },
   {
-    text: "How does he feel about tea and hot drinks?",
+    text: "How does Mohamed feel about tea and hot drinks?",
     choices: ["Loves them a lot", "Not a big fan of them", "Drinks them all the time"],
     correctIndex: 1
   },
   {
-    text: "If he drinks tea, how does he like it?",
+    text: "If Mohamed drinks tea, how does he like it?",
     choices: ["Light with plenty of sugar", "Heavy with little sugar", "No sugar at all"],
     correctIndex: 0
   },
   {
-    text: "What is his job stack? 💼",
+    text: "What is Mohamed's job stack? 💼",
     choices: ["Frontend developer 🎨", "Backend developer ☕", "Mobile developer 📱"],
     correctIndex: 1
   },
   {
-    text: "Compared to her, he prefers…",
+    text: "Compared to you, Mohamed prefers…",
     choices: ["Sleeping more 😴", "Staying awake more 😎", "Same as her"],
     correctIndex: 1
   },
@@ -62,7 +62,7 @@ const questions = [
   },
   {
     text: "Who prefers sleeping more? 😴",
-    choices: ["You (her) 😄", "Him", "Both the same"],
+    choices: ["You 😄", "Mohamed", "Both the same"],
     correctIndex: 0
   },
   {
@@ -142,7 +142,7 @@ function setSheepLabel(text) {
   const charBottom   = parseInt(getComputedStyle(document.documentElement)
                          .getPropertyValue('--char-bottom')) || 100;
   const charHeight   = sheepWrap.offsetHeight;
-  const gap          = -60;
+  const gap          = -45;
 
   sheepBubble.style.bottom = (charBottom + charHeight + gap) + 'px';
   sheepBubble.classList.remove('hidden');

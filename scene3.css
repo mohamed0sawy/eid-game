@@ -467,8 +467,8 @@ html, body {
 /* ── Responsive — matches scene 2 ──────────── */
 @media (max-width: 600px) {
   :root {
-    --ground-height: 300px;
-    --char-bottom:   182px;
+    --ground-height: 250px;
+    --char-bottom:   135px;
   }
 
   #quiz-panel {
@@ -484,7 +484,7 @@ html, body {
 
 @media (max-height: 600px) {
   :root {
-    --ground-height: 300px;
-    --char-bottom:   182px;
+    --ground-height: 250px;
+    --char-bottom:   135px;
   }
 }
