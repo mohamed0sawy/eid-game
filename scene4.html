@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scene 4 — Happy Eid ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="scene4.css" />
+</head>
+<body>
+
+  <div id="scene">
+
+    <!-- Sky -->
+    <div id="sky"></div>
+
+    <!-- ── Bunting decoration ── -->
+    <div id="bunting-wrap">
+      <div class="bunting-string" id="bunting-left">
+        <div class="flag" style="--c:#E8A87C"></div>
+        <div class="flag" style="--c:#7EC8A4"></div>
+        <div class="flag" style="--c:#F5CBA7"></div>
+        <div class="flag" style="--c:#85C1E9"></div>
+        <div class="flag" style="--c:#C1694F"></div>
+        <div class="flag" style="--c:#A9DFBF"></div>
+        <div class="flag" style="--c:#F8C471"></div>
+      </div>
+      <div class="bunting-string" id="bunting-right">
+        <div class="flag" style="--c:#F8C471"></div>
+        <div class="flag" style="--c:#A9DFBF"></div>
+        <div class="flag" style="--c:#C1694F"></div>
+        <div class="flag" style="--c:#85C1E9"></div>
+        <div class="flag" style="--c:#F5CBA7"></div>
+        <div class="flag" style="--c:#7EC8A4"></div>
+        <div class="flag" style="--c:#E8A87C"></div>
+      </div>
+    </div>
+
+    <!-- Clouds -->
+    <div id="clouds-layer">
+      <img src="assets/cloud.png" alt="" class="cloud cloud-1" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-2" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-3" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-4" />
+    </div>
+
+    <!-- Ground -->
+    <div id="ground">
+      <img src="assets/ground.png" alt="ground" />
+    </div>
+
+    <!-- ── Characters ── -->
+
+    <!-- Fiancée — starts off-screen left -->
+    <div id="fiancee-wrap">
+      <img id="fiancee" src="assets/fiancee_smile_right.png" alt="Fiancée" />
+    </div>
+
+    <!-- Me — starts off-screen right -->
+    <div id="me-wrap">
+      <img id="me" src="assets/me_left_hands_down.png" alt="Me" style="width: 26vw; margin-bottom: 11px;"/>
+    </div>
+
+    <!-- ── Speech Bubbles ── -->
+
+    <!-- Fiancée bubble — left side -->
+    <div id="bubble-fiancee" class="speech-bubble hidden">
+      <p class="bubble-text" id="text-fiancee"></p>
+      <button class="next-btn" id="next-btn-fiancee">Next ›</button>
+    </div>
+
+    <!-- Me bubble — right side -->
+    <div id="bubble-me" class="speech-bubble hidden">
+      <p class="bubble-text" id="text-me"></p>
+      <button class="next-btn" id="next-btn-me">Next ›</button>
+    </div>
+
+    <!-- ── Final overlay ── -->
+    <div id="final-overlay" class="hidden">
+      <p id="eid-text">Eid Mubarak ❤️</p>
+      <button id="restart-btn">🔁 Play Again</button>
+    </div>
+
+    <!-- Confetti canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+  </div><!-- /scene -->
+
+  <!-- canvas-confetti from CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+  <script src="scene4.js"></script>
+</body>
+</html>
