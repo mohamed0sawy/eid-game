@@ -62,6 +62,8 @@ const STEPS = [
     type:    'dialogue',
     speaker: 'fiancee',
     fianceeImg: 'smile_right',
+    speakerName: 'Mariam',
+    speakerLabel: 'mariam',
     text:    "That professor sheep was… weird 😄",
   },
   // ── STEP 2: Fiancée second dialogue
@@ -69,6 +71,8 @@ const STEPS = [
     type:    'dialogue',
     speaker: 'fiancee',
     fianceeImg: 'smile_right',
+    speakerName: 'Mariam',
+    speakerLabel: 'mariam',
     text:    "But I think I did pretty well 😏",
   },
   // ── STEP 3: Me walks in (Next click triggers it)
@@ -82,6 +86,8 @@ const STEPS = [
     type:    'dialogue',
     speaker: 'fiancee',
     fianceeImg: 'look_right',
+    speakerName: 'Mariam',
+    speakerLabel: 'mariam',
     text:    "Oh! You're here! 😄",
   },
   // ── STEP 5: I greet (waving)
@@ -89,6 +95,8 @@ const STEPS = [
     type:    'dialogue',
     speaker: 'me',
     meImg:   'waving',
+  speakerName: 'Mohamed',
+  speakerLabel: 'mohamed',
     text:    "Of course… I was waiting for you",
   },
   // ── STEP 6: I continue
@@ -96,6 +104,8 @@ const STEPS = [
     type:    'dialogue',
     speaker: 'me',
     meImg:   'waving',
+  speakerName: 'Mohamed',
+  speakerLabel: 'mohamed',
     text:    "You did great back there 😊",
   },
   // ── STEP 7: She blushes
@@ -103,6 +113,8 @@ const STEPS = [
     type:    'dialogue',
     speaker: 'fiancee',
     fianceeImg: 'blush',
+    speakerName: 'Mariam',
+    speakerLabel: 'mariam',
     text:    "Hehe… thank you 😊",
   },
   // ── STEP 8: Walk toward each other
@@ -114,6 +126,8 @@ const STEPS = [
     type:    'dialogue',
     speaker: 'me',
     meImg:   'hands_down',
+  speakerName: 'Mohamed',
+  speakerLabel: 'mohamed',
     text:    "I just wanted to say you are such a sweet person ❤️",
   },
   // ── STEP 10: Final dialogue — me again
@@ -121,6 +135,8 @@ const STEPS = [
     type:    'dialogue',
     speaker: 'me',
     meImg:   'hands_down',
+  speakerName: 'Mohamed',
+  speakerLabel: 'mohamed',
     text:    "Happy Eid, Mariam ❤️",
     isLast:  true,
   },
@@ -164,13 +180,17 @@ function positionBubble(bubble, charWrap) {
   bubble.style.bottom = (charBottom + charHeight + 18) + 'px';
 }
 
-function showBubble(speaker, text, btnLabel) {
+function showBubble(speaker, text, btnLabel, speakerName, speakerLabel) {
   hideAllBubbles();
 
   const bubble  = speaker === 'fiancee' ? bubbleFiancee : bubbleMe;
   const textEl  = speaker === 'fiancee' ? textFiancee   : textMe;
   const btn     = speaker === 'fiancee' ? btnFiancee    : btnMe;
   const charWrap= speaker === 'fiancee' ? fianceeWrap   : meWrap;
+
+  const labelId = speaker === 'fiancee' ? 'label-fiancee' : 'label-me';
+  const labelEl = document.getElementById(labelId);
+  if (labelEl) { labelEl.textContent = speakerName; labelEl.className = `dialogue-label ${speakerLabel}`; }
 
   positionBubble(bubble, charWrap);
 
@@ -321,7 +341,7 @@ function processStep(index) {
     const isLast   = !!step.isLast;
     const btnLabel = isLast ? 'Finish ❤️' : 'Next ›';
 
-    showBubble(step.speaker, step.text, btnLabel);
+    showBubble(step.speaker, step.text, btnLabel, step.speakerName, step.speakerLabel);
   }
 }
 

@@ -76,7 +76,7 @@ const questions = [
     correctIndex: 2
   },
   {
-    text: "يعنى جوبتى غلط واعترفتى.. ليكى فرصة تانية <br> Answer honestly 😌",
+    text: "يعنى جاوبتى غلط واعترفتى.. ليكى فرصة تانية <br> Answer honestly 😌",
     choices: ["Mohamed is always right", "Sometimes Mohamed is right", "I will not admit anything"],
     correctIndex: 0
   }

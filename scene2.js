@@ -34,6 +34,8 @@ const STEPS = [
     type:      'dialogue',
     speaker:   'fiancee',
     fianceeImg:'smile_right',
+    speakerName: 'Mariam',
+    speakerLabel: 'mariam',
     text:      "What a beautiful day... Eid vibes are everywhere ☀️",
   },
   {
@@ -43,30 +45,40 @@ const STEPS = [
     type:      'dialogue',
     speaker:   'fiancee',
     fianceeImg:'nervous',
+    speakerName: 'Mariam',
+    speakerLabel: 'mariam',
     text:      "Umm... is that a talking sheep?! 😳",
   },
   {
     type:      'dialogue',
     speaker:   'sheep',
     fianceeImg:'nervous',
+    speakerName: 'Prof. Sheep',
+    speakerLabel: 'sheep',
     text:      "Welcome! I am Professor Sheep",
   },
   {
     type:      'dialogue',
     speaker:   'sheep',
     fianceeImg:'nervous',
+    speakerName: 'Prof. Sheep',
+    speakerLabel: 'sheep',
     text:      "I have prepared a few questions for you today!",
   },
   {
     type:      'dialogue',
     speaker:   'fiancee',
     fianceeImg:'thinking',
+    speakerName: 'Mariam',
+    speakerLabel: 'mariam',
     text:      "Hmm... questions?",
   },
   {
     type:      'dialogue',
     speaker:   'fiancee',
     fianceeImg:'smile_right',
+    speakerName: 'Mariam',
+    speakerLabel: 'mariam',
     text:      "Alright... let's do it! 😄",
     isLast:    true,
   },
@@ -157,7 +169,7 @@ function setFianceeImage(key) {
  * position it above the correct character,
  * then type the text.
  */
-function showBubble(speaker, text, btnLabel, onDone) {
+function showBubble(speaker, text, btnLabel, speakerName, speakerLabel, onDone) {
   // Hide both
   hideBubble(bubbleFiancee);
   hideBubble(bubbleSheep);
@@ -165,6 +177,10 @@ function showBubble(speaker, text, btnLabel, onDone) {
   const bubble = speaker === 'fiancee' ? bubbleFiancee : bubbleSheep;
   const textEl = speaker === 'fiancee' ? textFiancee   : textSheep;
   const btn    = speaker === 'fiancee' ? btnFiancee     : btnSheep;
+
+  const labelId = speaker === 'fiancee' ? 'label-fiancee' : 'label-sheep';
+  const labelEl = document.getElementById(labelId);
+  if (labelEl) { labelEl.textContent = speakerName; labelEl.className = `dialogue-label ${speakerLabel}`; }
 
   // Position bubble above the right character
   positionBubble(bubble, speaker);
@@ -222,9 +238,7 @@ function processStep(index) {
     const isLast   = !!step.isLast;
     const btnLabel = isLast ? "Let's go! 🎮" : 'Next ›';
 
-    showBubble(step.speaker, step.text, btnLabel, () => {
-      // Typing complete — nothing extra needed
-    });
+    showBubble(step.speaker, step.text, btnLabel, step.speakerName, step.speakerLabel, () => {});
   }
 }
 

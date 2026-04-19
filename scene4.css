@@ -406,3 +406,18 @@ html, body {
     --char-bottom:   182px;
   }
 }
+
+/* ── Speaker Label ──────────────────────────── */
+.dialogue-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  opacity: 0.75;
+  margin-bottom: 2px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dialogue-label.mariam  { color: #C1694F; }
+.dialogue-label.mohamed { color: #5B8FA8; }
+.dialogue-label.sheep   { color: #7A6A52; }
