@@ -1,0 +1,620 @@
+/* ============================================
+   SCENE 3.5 — Memory Book CSS
+   Consistent with scenes 1–4 design language
+   ============================================ */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --sky-top:       #87CEEB;
+  --sky-bottom:    #C9E8F5;
+  --bubble-bg:     #FFFDF7;
+  --bubble-border: #D9C4A0;
+  --bubble-shadow: rgba(90, 60, 30, 0.15);
+  --text-color:    #3B2A1A;
+  --btn-bg:        #C1694F;
+  --btn-hover:     #A8573E;
+  --btn-text:      #FFFFFF;
+
+  --ground-height: 120px;
+  --char-bottom:   100px;
+  --char-height:   clamp(180px, 35vh, 320px);
+
+  /* Book page warm paper tone */
+  --page-bg:       #FDF6E3;
+  --page-text:     #3B2A1A;
+  --page-date:     #C1694F;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ── Scene ──────────────────────────────────── */
+#scene {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  animation: sceneFadeIn 1.2s ease forwards;
+}
+
+#scene.fade-out {
+  animation: sceneFadeOut 1.5s ease forwards;
+}
+
+@keyframes sceneFadeIn  { from { opacity: 0; } to { opacity: 1; } }
+@keyframes sceneFadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+/* ── Sky ────────────────────────────────────── */
+#sky {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--sky-top) 0%, var(--sky-bottom) 100%);
+  z-index: 0;
+}
+
+/* ── Clouds ─────────────────────────────────── */
+#clouds-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.cloud {
+  position: absolute;
+  opacity: 0.88;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-name: cloudDrift;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.cloud-1 { width: 220px; top: 6%;  animation-duration: 35s; animation-delay: 0s;   }
+.cloud-2 { width: 140px; top: 14%; animation-duration: 25s; animation-delay: -10s; }
+.cloud-3 { width: 100px; top: 4%;  animation-duration: 20s; animation-delay: -5s;  }
+.cloud-4 { width: 180px; top: 20%; animation-duration: 30s; animation-delay: -18s; }
+
+@keyframes cloudDrift {
+  from { transform: translateX(110vw); }
+  to   { transform: translateX(-30vw); }
+}
+
+/* ── Ground ─────────────────────────────────── */
+#ground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: var(--ground-height);
+  z-index: 2;
+  overflow: hidden;
+}
+
+#ground img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+}
+
+/* ── Fiancée ────────────────────────────────── */
+#fiancee-wrap {
+  position: absolute;
+  bottom: var(--char-bottom);
+  left: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  /* starts off-screen left */
+  transform: translateX(-120vw);
+  transition: transform 1.8s ease;
+}
+
+#fiancee-wrap.walk-in {
+  transform: translateX(4vw);
+}
+
+#fiancee-wrap.walk-to-book {
+  transform: translateX(22vw);
+}
+
+#fiancee-wrap img {
+  display: block;
+  height: var(--char-height);
+  width: 75%;
+  object-fit: contain;
+  filter: drop-shadow(0px 8px 16px rgba(80, 40, 10, 0.22));
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Fade out character when book opens fully */
+#fiancee-wrap.fade-char {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 1.8s ease;
+}
+
+/* ── Book on Ground ─────────────────────────── */
+#book-ground-wrap {
+  position: absolute;
+  bottom: 50vw;
+  right: 18vw;
+  z-index: 3;
+  transform: perspective(400px) rotateX(0deg) scale(0.8);
+  transform-origin: bottom center;
+  cursor: pointer;
+}
+
+#book-ground-wrap img {
+  width: clamp(100px, 16vw, 180px);
+  display: block;
+  filter: drop-shadow(0 6px 12px rgba(80,40,10,0.3));
+}
+
+/* Shake animation on first appearance */
+#book-ground-wrap.book-shake {
+  animation: bookShake 0.6s ease;
+}
+
+#book-ground-wrap.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@keyframes bookShake {
+  0%,100% { transform: perspective(400px) rotateX(0deg) scale(0.8) rotate(0deg); }
+  20%      { transform: perspective(400px) rotateX(0deg) scale(0.8) rotate(-6deg); }
+  40%      { transform: perspective(400px) rotateX(0deg) scale(0.8) rotate(6deg); }
+  60%      { transform: perspective(400px) rotateX(0deg) scale(0.8) rotate(-3deg); }
+  80%      { transform: perspective(400px) rotateX(0deg) scale(0.8) rotate(2deg); }
+}
+
+/* Float pulse while waiting to be tapped */
+#book-ground-wrap.book-float {
+  animation: bookFloat 2s ease-in-out infinite;
+}
+
+@keyframes bookFloat {
+  0%,100% { transform: perspective(400px) rotateX(0deg) scale(0.8) translateY(0px); }
+  50%      { transform: perspective(400px) rotateX(0deg) scale(0.8) translateY(-8px); }
+}
+
+/* ── Book Activated (raised → opening) ─────── */
+#book-activated-wrap {
+  position: absolute;
+  left: 50%;
+  bottom: var(--ground-height); /* start at ground level, not floating */
+  transform: translateX(-50%) scale(0.5);
+  z-index: 15;
+  transition: transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+              bottom 0.7s ease,
+              opacity 0.4s ease;
+  transform-origin: bottom center;
+  opacity: 0; /* invisible until JS triggers it */
+}
+
+#book-activated-wrap.book-rise {
+  transform: translateX(-50%) scale(1.8);
+  bottom: calc(var(--ground-height) + 80px);
+  opacity: 1;
+}
+
+#book-activated-wrap img {
+  width: clamp(160px, 28vw, 320px);
+  display: block;
+  filter: drop-shadow(0 12px 24px rgba(80,40,10,0.35));
+}
+
+#book-activated-wrap.book-fully-open {
+  transform: translateX(-50%) scale(1.8);
+  bottom: calc(var(--ground-height) + 75px);
+  opacity: 1;
+  width: 55%;
+  height: 15%;
+  position: absolute;
+}
+
+#book-activated-wrap.book-fully-open img {
+  display: block;
+  filter: drop-shadow(0 12px 24px rgba(80, 40, 10, 0.35));
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Book Overlay (fully open) ──────────────── */
+#book-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(60, 35, 10, 0.55);
+  backdrop-filter: blur(3px);
+  animation: overlayIn 0.5s ease forwards;
+}
+
+#book-overlay.hidden { display: none; }
+
+@keyframes overlayIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Book Frame ─────────────────────────────── */
+#book-frame {
+  left: -99vw;
+  position: absolute;
+  width: clamp(300px, 210vw, 1006px);
+  animation: bookFramePop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes bookFramePop {
+  from { transform: scale(0.82); opacity: 0; }
+  to   { transform: scale(1);    opacity: 1; }
+}
+
+#book-open-img {
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  filter: drop-shadow(0 16px 40px rgba(40,20,5,0.5));
+}
+
+/* ── Pages on top of book ───────────────────── */
+#book-pages {
+  position: absolute;
+  top: -3%;
+  left: 51%;
+  right: 9%;
+  bottom: 1%;
+  display: flex;
+  align-items: stretch;
+}
+
+.book-page {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.book-page.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.page-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 12px;
+  text-align: center;
+}
+
+/* ── Page photo ─────────────────────────────── */
+.page-photo-wrap {
+  width: 100%;
+  flex: 1;
+  max-height: 45%;
+  overflow: hidden;
+  border-radius: 6px;
+  border: 2px solid var(--bubble-border);
+  background: #F0E8D5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Page text ──────────────────────────────── */
+.page-text {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(11px, 1.6vw, 15px);
+  color: var(--page-text);
+  line-height: 1.55;
+}
+
+.page-text.italic {
+  font-style: italic;
+  color: var(--btn-bg);
+}
+
+.page-date {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(11px, 1.5vw, 14px);
+  color: var(--page-date);
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+
+/* ── Puzzle page ────────────────────────────── */
+.puzzle-page {
+  gap: 12px;
+}
+
+#puzzle-inputs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 4px;
+}
+
+.puzzle-input {
+  width: clamp(48px, 10vw, 68px);
+  height: clamp(48px, 10vw, 68px);
+  text-align: center;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: clamp(16px, 2.5vw, 24px);
+  color: var(--text-color);
+  background: #FFF8EE;
+  border: 2px solid var(--bubble-border);
+  border-radius: 12px;
+  outline: none;
+  transition: border-color 0.2s ease;
+  /* hide number spinners */
+  -moz-appearance: textfield;
+}
+.puzzle-input::-webkit-outer-spin-button,
+.puzzle-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+
+.puzzle-input:focus {
+  border-color: var(--btn-bg);
+}
+
+.puzzle-input.shake {
+  animation: inputShake 0.4s ease;
+}
+
+@keyframes inputShake {
+  0%,100% { transform: translateX(0);   }
+  25%      { transform: translateX(-5px); }
+  75%      { transform: translateX(5px);  }
+}
+
+#puzzle-submit {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(12px, 1.6vw, 15px);
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 50px;
+  padding: 9px 24px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(193,105,79,0.35);
+  transition: background 0.2s ease, transform 0.1s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#puzzle-submit:active {
+  transform: scale(0.96);
+  background: var(--btn-hover);
+}
+
+#puzzle-feedback {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(12px, 1.6vw, 15px);
+  text-align: center;
+  animation: feedbackPop 0.3s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+@keyframes feedbackPop {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1);   }
+}
+
+#puzzle-feedback.correct { color: #2E7D32; }
+#puzzle-feedback.wrong   { color: #C62828; }
+
+/* ── Page Navigation ────────────────────────── */
+#page-nav {
+  position: absolute;
+  bottom: -9%;
+  left: 41%;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  z-index: 5;
+}
+
+.page-nav-btn {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 900;
+  font-size: clamp(16px, 2.5vw, 22px);
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 50%;
+  width: clamp(32px, 5vw, 42px);
+  height: clamp(32px, 5vw, 42px);
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 8px rgba(193,105,79,0.3);
+  -webkit-tap-highlight-color: transparent;
+  line-height: 1;
+}
+
+.page-nav-btn:active:not(:disabled) {
+  transform: scale(0.93);
+  background: var(--btn-hover);
+}
+
+.page-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+#page-indicator {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(11px, 1.5vw, 14px);
+  color: #ffffff;
+  opacity: 0.7;
+  white-space: nowrap;
+}
+
+/* ── Speech Bubble ──────────────────────────── */
+.speech-bubble {
+  position: absolute;
+  z-index: 10;
+  background: var(--bubble-bg);
+  border: 2px solid var(--bubble-border);
+  border-radius: 20px;
+  box-shadow: 0 6px 24px var(--bubble-shadow), 0 1px 4px rgba(90,60,30,0.08);
+  padding: 20px 24px 16px;
+  width: clamp(240px, 38vw, 420px);
+  min-height: 90px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  outline: 1px solid rgba(255,250,235,0.8);
+  outline-offset: -5px;
+  bottom: 0;
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--bubble-border);
+  opacity: 0.55;
+  box-shadow: -10px 0 0 var(--bubble-border), -20px 0 0 var(--bubble-border);
+}
+
+#bubble-fiancee { left: 4vw; }
+
+.speech-bubble.hidden  { display: none; }
+.speech-bubble.visible {
+  display: flex;
+  animation: bubbleAppear 0.4s cubic-bezier(0.34,1.56,0.64,1) forwards;
+}
+
+@keyframes bubbleAppear {
+  from { opacity: 0; transform: scale(0.9) translateY(8px); }
+  to   { opacity: 1; transform: scale(1)   translateY(0px); }
+}
+
+/* ── Bubble text & label ────────────────────── */
+.bubble-text {
+  font-family: 'Lora', Georgia, serif;
+  font-size: clamp(14px, 1.9vw, 18px);
+  line-height: 1.7;
+  color: var(--text-color);
+  min-height: 2.4em;
+  border-right: 2px solid transparent;
+  word-break: break-word;
+}
+
+.bubble-text.typing {
+  border-right-color: var(--text-color);
+  animation: cursorBlink 0.7s step-end infinite;
+}
+
+@keyframes cursorBlink {
+  0%,100% { border-right-color: var(--text-color); }
+  50%      { border-right-color: transparent; }
+}
+
+.dialogue-label {
+  font-family: 'Nunito', sans-serif;
+  font-size: 12px;
+  font-weight: 800;
+  opacity: 0.75;
+  margin-bottom: 2px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.dialogue-label.mariam  { color: #C1694F; }
+.dialogue-label.mohamed { color: #5B8FA8; }
+.dialogue-label.sheep   { color: #7A6A52; }
+
+/* ── Next button ────────────────────────────── */
+.next-btn {
+  align-self: flex-end;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
+  font-size: clamp(12px, 1.5vw, 14px);
+  letter-spacing: 0.03em;
+  color: var(--btn-text);
+  background: var(--btn-bg);
+  border: none;
+  border-radius: 50px;
+  padding: 8px 22px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 10px rgba(193,105,79,0.35);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.next-btn:active:not(:disabled) {
+  transform: scale(0.96);
+  background: var(--btn-hover);
+}
+
+.next-btn:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+/* ── Responsive ─────────────────────────────── */
+@media (max-width: 600px) {
+  :root {
+    --ground-height: 300px;
+    --char-bottom:   182px;
+  }
+
+  .speech-bubble {
+    width: 80vw;
+    padding: 16px 16px 12px;
+  }
+
+  #bubble-fiancee { left: 2vw; }
+
+  #book-ground-wrap {
+    right: 10vw;
+  }
+}
+
+@media (max-height: 600px) {
+  :root {
+    --ground-height: 300px;
+    --char-bottom:   182px;
+  }
+}

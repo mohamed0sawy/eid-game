@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scene 3.5 — The Memory Book</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="scene3_5.css" />
+</head>
+<body>
+
+  <div id="scene">
+
+    <!-- Sky -->
+    <div id="sky"></div>
+
+    <!-- Clouds -->
+    <div id="clouds-layer">
+      <img src="assets/cloud.png" alt="" class="cloud cloud-1" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-2" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-3" />
+      <img src="assets/cloud.png" alt="" class="cloud cloud-4" />
+    </div>
+
+    <!-- Ground -->
+    <div id="ground">
+      <img src="assets/ground.png" alt="ground" />
+    </div>
+
+    <!-- ── Fiancée character ── -->
+    <div id="fiancee-wrap">
+      <img id="fiancee" src="assets/fiancee_smile_right.png" alt="Fiancée" />
+    </div>
+
+    <!-- ── Book lying on ground (initial) ── -->
+    <div id="book-ground-wrap">
+      <img id="book-ground-img" src="assets/book_ground.png" alt="book on ground" />
+    </div>
+
+    <!-- ── Book raised → opening sequence ── -->
+    <div id="book-activated-wrap" class="hidden">
+      <img id="book-activated-img" src="assets/book_front.png" alt="book opening" />
+    </div>
+
+    <!-- ── Fiancée speech bubble ── -->
+    <div id="bubble-fiancee" class="speech-bubble hidden">
+      <div class="dialogue-label" id="label-fiancee"></div>
+      <p class="bubble-text" id="text-fiancee"></p>
+      <button class="next-btn" id="next-btn-fiancee">Next ›</button>
+    </div>
+
+    <!-- ══════════════════════════════════════
+         BOOK OVERLAY — shown when fully open
+    ═══════════════════════════════════════ -->
+    <div id="book-overlay" class="hidden">
+      <div id="book-frame">
+
+        <!-- Open book as background base -->
+        <img id="book-open-img" src="assets/book_open_100.png" alt="open book" />
+
+        <!-- Pages layered on top of book -->
+        <div id="book-pages">
+
+          <!-- PAGE 1 -->
+          <div class="book-page active" id="page-1">
+            <div class="page-inner">
+              <div class="page-photo-wrap">
+                <img src="assets/memory_1.png" alt="memory" class="page-photo" onerror="this.style.display='none'" />
+              </div>
+              <p class="page-text">"The first time we met…"</p>
+              <p class="page-text italic">"It all started here ❤️"</p>
+              <p class="page-date" id="date-1"></p>
+            </div>
+          </div>
+
+          <!-- PAGE 2 -->
+          <div class="book-page" id="page-2">
+            <div class="page-inner">
+              <div class="page-photo-wrap">
+                <img src="assets/memory_2.png" alt="memory" class="page-photo" onerror="this.style.display='none'" />
+              </div>
+              <p class="page-text">"The day everything became real"</p>
+              <p class="page-date" id="date-2"></p>
+            </div>
+          </div>
+
+          <!-- PAGE 3 -->
+          <div class="book-page" id="page-3">
+            <div class="page-inner">
+              <div class="page-photo-wrap">
+                <img src="assets/memory_3.png" alt="memory" class="page-photo" onerror="this.style.display='none'" />
+              </div>
+              <p class="page-text">"One of the happiest days"</p>
+              <p class="page-date" id="date-3"></p>
+            </div>
+          </div>
+
+          <!-- PAGE 4 — Puzzle -->
+          <div class="book-page" id="page-4">
+            <div class="page-inner puzzle-page">
+              <p class="page-text">"If you remember these days well…"</p>
+              <p class="page-text italic">"Enter the 3 numbers to continue"</p>
+              <div id="puzzle-inputs">
+                <input type="number" class="puzzle-input" id="p-input-1" placeholder="?" />
+                <input type="number" class="puzzle-input" id="p-input-2" placeholder="?" />
+                <input type="number" class="puzzle-input" id="p-input-3" placeholder="?" />
+              </div>
+              <button id="puzzle-submit">Submit</button>
+              <p id="puzzle-feedback" class="hidden"></p>
+            </div>
+          </div>
+
+        </div><!-- /book-pages -->
+
+        <!-- Page navigation -->
+        <div id="page-nav">
+          <button id="page-prev" class="page-nav-btn" disabled>‹</button>
+          <span id="page-indicator">Page 1 / 4</span>
+          <button id="page-next" class="page-nav-btn">›</button>
+        </div>
+
+      </div><!-- /book-frame -->
+    </div><!-- /book-overlay -->
+
+  </div><!-- /scene -->
+
+  <script src="scene3_5.js"></script>
+</body>
+</html>
