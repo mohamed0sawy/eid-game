@@ -64,7 +64,7 @@ const STEPS = [
     fianceeImg: 'smile_right',
     speakerName: 'Mariam',
     speakerLabel: 'mariam',
-    text:    "That professor sheep was… weird 😄",
+    text:    "I can't believe there was a memory book… 😊",
   },
   // ── STEP 2: Fiancée second dialogue
   {
@@ -73,7 +73,7 @@ const STEPS = [
     fianceeImg: 'smile_right',
     speakerName: 'Mariam',
     speakerLabel: 'mariam',
-    text:    "But I think I did pretty well 😏",
+    text:    "But I solved it! 😏",
   },
   // ── STEP 3: Me walks in (Next click triggers it)
   {
@@ -128,7 +128,7 @@ const STEPS = [
     meImg:   'hands_down',
   speakerName: 'Mohamed',
   speakerLabel: 'mohamed',
-    text:    "I just wanted to say you are such a sweet person ❤️",
+    text:    "I just wanted to say you are such a sweet person 🤍",
   },
   // ── STEP 10: Final dialogue — me again
   {
@@ -137,7 +137,7 @@ const STEPS = [
     meImg:   'hands_down',
   speakerName: 'Mohamed',
   speakerLabel: 'mohamed',
-    text:    "Happy Eid, Mariam ❤️",
+    text:    "Happy Eid, Mariam 🤍",
     isLast:  true,
   },
   // ── STEP 11: Confetti + finale
@@ -339,7 +339,7 @@ function processStep(index) {
     if (step.meImg)      setMe(step.meImg);
 
     const isLast   = !!step.isLast;
-    const btnLabel = isLast ? 'Finish ❤️' : 'Next ›';
+    const btnLabel = isLast ? 'Finish' : 'Next ›';
 
     showBubble(step.speaker, step.text, btnLabel, step.speakerName, step.speakerLabel);
   }
@@ -357,7 +357,7 @@ function handleNext(speaker) {
     skipType(speaker);
     if (step && step.isLast) {
       const btn = speaker === 'fiancee' ? btnFiancee : btnMe;
-      btn.textContent = 'Finish ❤️';
+      btn.textContent = 'Finish';
     }
     return;
   }
@@ -437,6 +437,50 @@ function fireConfetti() {
 
 function showFinalOverlay() {
   finalOverlay.classList.remove('hidden');
+
+  // Step 1 — burst sparkles around center
+  spawnSparkles();
+
+  // Step 2 — after 1s, reveal the text
+  setTimeout(() => {
+    document.getElementById('eid-text').classList.add('revealed');
+  }, 2000);
+}
+
+function spawnSparkles() {
+  const container = document.getElementById('eid-sparkles');
+  container.innerHTML = '';
+
+  // Sparkle positions scattered around center
+  const positions = [
+    { top: '10%',  left: '10%',  delay: '0s'    },
+    { top: '5%',   left: '40%',  delay: '0.1s'  },
+    { top: '15%',  left: '75%',  delay: '0.05s' },
+    { top: '50%',  left: '5%',   delay: '0.2s'  },
+    { top: '50%',  left: '90%',  delay: '0.15s' },
+    { top: '80%',  left: '20%',  delay: '0.25s' },
+    { top: '85%',  left: '55%',  delay: '0.1s'  },
+    { top: '70%',  left: '85%',  delay: '0.3s'  },
+    { top: '30%',  left: '30%',  delay: '0.18s' },
+    { top: '30%',  left: '65%',  delay: '0.22s' },
+    { top: '60%',  left: '48%',  delay: '0.08s' },
+  ];
+
+  positions.forEach(pos => {
+    const dot = document.createElement('div');
+    dot.className = 'sparkle';
+    dot.style.top             = pos.top;
+    dot.style.left            = pos.left;
+    dot.style.animationDelay  = pos.delay;
+    // Slight size variation for natural feel
+    const size = 5 + Math.random() * 7;
+    dot.style.width  = size + 'px';
+    dot.style.height = size + 'px';
+    // Color variation: gold / terracotta / warm white
+    const colors = ['#F5C842', '#E8A87C', '#FFF5CC', '#C1694F', '#FFD700'];
+    dot.style.background = colors[Math.floor(Math.random() * colors.length)];
+    container.appendChild(dot);
+  });
 }
 
 restartBtn.addEventListener('click', () => {

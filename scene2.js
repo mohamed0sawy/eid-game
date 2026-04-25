@@ -236,7 +236,7 @@ function processStep(index) {
     setFianceeImage(step.fianceeImg);
 
     const isLast   = !!step.isLast;
-    const btnLabel = isLast ? "Let's go! 🎮" : 'Next ›';
+    const btnLabel = isLast ? "Let's go!" : 'Next ›';
 
     showBubble(step.speaker, step.text, btnLabel, step.speakerName, step.speakerLabel, () => {});
   }
