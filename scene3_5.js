@@ -10,15 +10,21 @@ const PAGES = [
   {
     id: 1,
     date: "12/2025",           // ← replace with real day number
+    month: 12,  // Add explicit month field
+    year: 2025
     // text & image handled in HTML
   },
   {
     id: 2,
     date: "1/2026",           // ← replace with real day number
+    month: 1,  // Add explicit month field
+    year: 2026
   },
   {
     id: 3,
     date: "2/2026",            // ← replace with real day number
+    month: 2,  // Add explicit month field
+    year: 2026
   },
 ];
 
@@ -337,7 +343,7 @@ pageNext.addEventListener('click', nextPage);
 // ============================================
 
 function validatePuzzle() {
-  const answers = PAGES.map(p => p.date);
+  const answers = PAGES.map(p => p.month);
 
   const inputs = [
     document.getElementById('p-input-1'),
@@ -381,6 +387,20 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !bookOverlay.classList.contains('hidden')) {
     validatePuzzle();
   }
+});
+
+// Restrict all puzzle inputs to max 2 digits
+const puzzleInputs = document.querySelectorAll('.puzzle-input');
+puzzleInputs.forEach(input => {
+  input.addEventListener('input', function(e) {
+    // Remove any non-digit characters
+    this.value = this.value.replace(/\D/g, '');
+
+    // Limit to 2 digits
+    if (this.value.length > 2) {
+      this.value = this.value.slice(0, 2);
+    }
+  });
 });
 
 // ============================================
