@@ -342,6 +342,7 @@ pageNext.addEventListener('click', nextPage);
 //  PUZZLE VALIDATION
 // ============================================
 
+let hasTriedOnce = false;
 function validatePuzzle() {
   const answers = PAGES.map(p => p.month);
 
@@ -367,6 +368,10 @@ function validatePuzzle() {
   } else {
     puzzleFeedback.textContent = 'Hmm… try again 😏';
     puzzleFeedback.classList.add('wrong');
+    if (!hasTriedOnce) {
+        hasTriedOnce = true;
+        document.getElementById('puzzle-hint').classList.remove('hidden');
+      }
 
     // Shake wrong inputs
     inputs.forEach((inp, i) => {

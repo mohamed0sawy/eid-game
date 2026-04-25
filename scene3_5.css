@@ -437,6 +437,17 @@ html, body {
 #puzzle-feedback.correct { color: #2E7D32; }
 #puzzle-feedback.wrong   { color: #C62828; }
 
+#puzzle-hint {
+  font-family: 'Nunito', sans-serif;
+  font-size: clamp(11px, 1.4vw, 13px);
+  color: var(--text-color);
+  opacity: 0.5;
+  text-align: center;
+  font-style: italic;
+}
+
+#puzzle-hint.hidden  { display: none; }
+
 /* ── Page Navigation ────────────────────────── */
 #page-nav {
   position: absolute;
