@@ -255,6 +255,7 @@ html, body {
 
 /* ── Book Frame ─────────────────────────────── */
 #book-frame {
+  top: 17%;
   left: -99vw;
   position: absolute;
   width: clamp(300px, 210vw, 1006px);
