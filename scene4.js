@@ -444,7 +444,7 @@ function showFinalOverlay() {
   // Step 2 — after 1s, reveal the text
   setTimeout(() => {
     document.getElementById('eid-text').classList.add('revealed');
-  }, 2000);
+  }, 1200);
 }
 
 function spawnSparkles() {
