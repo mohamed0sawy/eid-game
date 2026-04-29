@@ -359,14 +359,14 @@ function validatePuzzle() {
   puzzleFeedback.classList.remove('hidden', 'correct', 'wrong');
 
   if (allCorrect) {
-    puzzleFeedback.textContent = '✅ Correct! 😄';
+    puzzleFeedback.textContent = '✅ Correct!';
     puzzleFeedback.classList.add('correct');
     puzzleSubmit.disabled = true;
     inputs.forEach(inp => inp.disabled = true);
 
     setTimeout(() => endScene(), 1800);
   } else {
-    puzzleFeedback.textContent = 'Hmm… try again 😏';
+    puzzleFeedback.textContent = 'Hmm… try again';
     puzzleFeedback.classList.add('wrong');
     if (!hasTriedOnce) {
         hasTriedOnce = true;
