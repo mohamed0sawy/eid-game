@@ -27,7 +27,7 @@ const SECTIONS = [
     id:      2,
     title:   "Her Kitchen 🍰",
     photos:  [
-      'assets/dessert_1.jpg',
+      'assets/dessert_1.png',
       'assets/dessert_2.jpg',
       'assets/dessert_3.jpg',
     ],
