@@ -330,3 +330,84 @@ html, body {
     font-size: clamp(16px, 3.5vw, 20px);
   }
 }
+
+
+/* ── Voice Note Player (Section 2 only) ─────── */
+.voice-note {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  background: rgba(217, 196, 160, 0.15);
+  border: 1px solid var(--bubble-border);
+  border-radius: 14px;
+}
+
+.voice-label {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(11px, 1.5vw, 13px);
+  color: var(--text-color);
+  opacity: 0.7;
+  text-align: center;
+}
+
+.voice-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ── Play/Pause button ── */
+.voice-play-btn {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--btn-bg);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 10px rgba(193, 105, 79, 0.35);
+  transition: transform 0.15s ease, background 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.voice-play-btn:active {
+  transform: scale(0.93);
+  background: var(--btn-hover);
+}
+
+.voice-icon {
+  color: #fff;
+  font-size: 15px;
+  line-height: 1;
+  /* Nudge play triangle visually centered */
+  margin-left: 2px;
+}
+
+/* Pause state — no nudge needed */
+.voice-play-btn.playing .voice-icon {
+  margin-left: 0;
+}
+
+/* ── Progress bar ── */
+.voice-progress-wrap {
+  flex: 1;
+  height: 6px;
+  background: #EDE0CC;
+  border-radius: 99px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.voice-progress-fill {
+  height: 100%;
+  width: 0%;
+  background: var(--btn-bg);
+  border-radius: 99px;
+  transition: width 0.25s linear;
+}

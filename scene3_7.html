@@ -58,6 +58,28 @@
 
           <p class="section-caption">"She cooks with love — you can taste it"</p>
 
+          <!-- EXISTING caption -->
+          <p class="section-caption">"She cooks with love — you can taste it 😍"</p>
+
+          <!-- ADD THIS BLOCK right after the caption, before card-footer -->
+          <div class="voice-note" id="voice-note-2">
+            <p class="voice-label">Want to know how she made it? 🎙️</p>
+            <div class="voice-controls">
+              <button class="voice-play-btn" id="voice-play-btn" aria-label="Play">
+                <span class="voice-icon" id="voice-icon">▶</span>
+              </button>
+              <div class="voice-progress-wrap" id="voice-progress-wrap">
+                <div class="voice-progress-fill" id="voice-progress-fill"></div>
+              </div>
+            </div>
+            <!-- Hidden native audio element -->
+            <audio id="voice-audio" src="assets/recipe_voice.mp3" preload="metadata"></audio>
+          </div>
+          <!-- END of addition -->
+
+          <!-- EXISTING card-footer -->
+          <div class="card-footer">
+
           <div class="card-footer">
             <button class="back-btn" id="back-2">‹</button>
             <div class="progress-dots" id="dots-2"></div>

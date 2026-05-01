@@ -211,3 +211,99 @@ window.addEventListener('load', () => {
     slideToSection(0);
   }, 100);
 });
+
+// ============================================
+//  VOICE NOTE PLAYER — Section 2 only
+// ============================================
+
+(function initVoicePlayer() {
+  const audio       = document.getElementById('voice-audio');
+  const playBtn     = document.getElementById('voice-play-btn');
+  const icon        = document.getElementById('voice-icon');
+  const fill        = document.getElementById('voice-progress-fill');
+  const progressWrap= document.getElementById('voice-progress-wrap');
+
+  if (!audio || !playBtn) return;
+
+  let isPlaying = false;
+  let rafId     = null;
+
+  // ── Get background music element (from music.js) ──
+  function getBgMusic() {
+    return document.getElementById('bg-music');
+  }
+
+  // ── Update progress bar via requestAnimationFrame ──
+  function updateProgress() {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    fill.style.width = pct + '%';
+    if (isPlaying) rafId = requestAnimationFrame(updateProgress);
+  }
+
+  // ── Play ──────────────────────────────────────────
+  function play() {
+    const bg = getBgMusic();
+    if (bg && !bg.paused) bg.pause();
+
+    audio.play();
+    isPlaying = true;
+    icon.textContent = '⏸';
+    playBtn.classList.add('playing');
+    rafId = requestAnimationFrame(updateProgress);
+  }
+
+  // ── Pause ─────────────────────────────────────────
+  function pause() {
+    audio.pause();
+    isPlaying = false;
+    icon.textContent = '▶';
+    playBtn.classList.remove('playing');
+    cancelAnimationFrame(rafId);
+
+    const bg = getBgMusic();
+    if (bg) bg.play().catch(() => {});
+  }
+
+  // ── Toggle ────────────────────────────────────────
+  playBtn.addEventListener('click', () => {
+    if (isPlaying) {
+      pause();
+    } else {
+      // Restart from beginning if already ended
+      if (audio.ended) {
+        audio.currentTime = 0;
+        fill.style.width  = '0%';
+      }
+      play();
+    }
+  });
+
+  // ── Audio ended → resume background music ─────────
+  audio.addEventListener('ended', () => {
+    isPlaying = false;
+    icon.textContent = '▶';
+    playBtn.classList.remove('playing');
+    fill.style.width = '0%';
+    cancelAnimationFrame(rafId);
+
+    const bg = getBgMusic();
+    if (bg) bg.play().catch(() => {});
+  });
+
+  // ── Tap on progress bar to seek ───────────────────
+  progressWrap.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = progressWrap.getBoundingClientRect();
+    const pct  = (e.clientX - rect.left) / rect.width;
+    audio.currentTime = pct * audio.duration;
+    fill.style.width  = (pct * 100) + '%';
+  });
+
+  // ── Pause voice if user leaves Section 2 ──────────
+  // Listens for the world-wrap transition and pauses if needed
+  document.getElementById('world-wrap').addEventListener('transitionend', () => {
+    if (isPlaying) pause();
+  });
+
+})();
