@@ -86,7 +86,7 @@ html, body {
 
 /* ── Card ───────────────────────────────────── */
 .section-card {
-  margin-bottom: 10vw;
+  margin-bottom: 22vw;
   position: relative;
   z-index: 2;
   background: var(--bubble-bg);
