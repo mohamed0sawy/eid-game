@@ -465,7 +465,7 @@ function endScene() {
 
   scene.addEventListener('animationend', () => {
     console.log('Scene 3.5 complete — Go to Scene 4');
-    window.location.href = 'scene4.html';
+    window.location.href = 'scene3_7.html';
   }, { once: true });
 }
 
