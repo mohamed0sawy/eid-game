@@ -216,6 +216,10 @@ window.addEventListener('load', () => {
 //  VOICE NOTE PLAYER — Section 2 only
 // ============================================
 
+// ============================================
+//  FIXED VOICE NOTE PLAYER
+// ============================================
+
 (function initVoicePlayer() {
   const audio       = document.getElementById('voice-audio');
   const playBtn     = document.getElementById('voice-play-btn');
@@ -227,83 +231,99 @@ window.addEventListener('load', () => {
 
   let isPlaying = false;
   let rafId     = null;
+  let isSliding = false;  // ← NEW: Track when we're actually sliding
 
-  // ── Get background music element (from music.js) ──
-  function getBgMusic() {
-    return document.getElementById('bg-music');
-  }
-
-  // ── Update progress bar via requestAnimationFrame ──
   function updateProgress() {
-    if (!audio.duration) return;
+    if (!audio.duration || !isPlaying) return;
     const pct = (audio.currentTime / audio.duration) * 100;
     fill.style.width = pct + '%';
-    if (isPlaying) rafId = requestAnimationFrame(updateProgress);
-  }
-
-  // ── Play ──────────────────────────────────────────
-  function play() {
-    const bg = getBgMusic();
-    if (bg && !bg.paused) bg.pause();
-
-    audio.play();
-    isPlaying = true;
-    icon.textContent = '⏸';
-    playBtn.classList.add('playing');
     rafId = requestAnimationFrame(updateProgress);
   }
 
-  // ── Pause ─────────────────────────────────────────
-  function pause() {
+  function play() {
+    const bg = document.getElementById('bg-music');
+    if (bg && !bg.paused) {
+      bg.pause();
+    }
+    
+    audio.play()
+      .then(() => {
+        isPlaying = true;
+        icon.textContent = '⏸';
+        playBtn.classList.add('playing');
+        updateProgress();
+      })
+      .catch(err => {
+        console.warn('Play failed:', err);
+        if (bg) bg.play().catch(() => {});
+      });
+  }
+
+  function pause(resumeBg = true) {
     audio.pause();
     isPlaying = false;
     icon.textContent = '▶';
     playBtn.classList.remove('playing');
     cancelAnimationFrame(rafId);
-
-    const bg = getBgMusic();
-    if (bg) bg.play().catch(() => {});
+    
+    if (resumeBg) {
+      const bg = document.getElementById('bg-music');
+      if (bg && bg.paused) {
+        bg.play().catch(() => {});
+      }
+    }
   }
 
-  // ── Toggle ────────────────────────────────────────
-  playBtn.addEventListener('click', () => {
+  playBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    
     if (isPlaying) {
-      pause();
+      pause(true);
     } else {
-      // Restart from beginning if already ended
       if (audio.ended) {
         audio.currentTime = 0;
-        fill.style.width  = '0%';
+        fill.style.width = '0%';
       }
       play();
     }
   });
 
-  // ── Audio ended → resume background music ─────────
+  if (progressWrap) {
+    progressWrap.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (!audio.duration) return;
+      const rect = progressWrap.getBoundingClientRect();
+      const pct = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+      audio.currentTime = pct * audio.duration;
+      fill.style.width = (pct * 100) + '%';
+    });
+  }
+
   audio.addEventListener('ended', () => {
     isPlaying = false;
     icon.textContent = '▶';
     playBtn.classList.remove('playing');
     fill.style.width = '0%';
     cancelAnimationFrame(rafId);
-
-    const bg = getBgMusic();
+    
+    const bg = document.getElementById('bg-music');
     if (bg) bg.play().catch(() => {});
   });
 
-  // ── Tap on progress bar to seek ───────────────────
-  progressWrap.addEventListener('click', (e) => {
-    if (!audio.duration) return;
-    const rect = progressWrap.getBoundingClientRect();
-    const pct  = (e.clientX - rect.left) / rect.width;
-    audio.currentTime = pct * audio.duration;
-    fill.style.width  = (pct * 100) + '%';
-  });
-
-  // ── Pause voice if user leaves Section 2 ──────────
-  // Listens for the world-wrap transition and pauses if needed
-  document.getElementById('world-wrap').addEventListener('transitionend', () => {
-    if (isPlaying) pause();
-  });
-
+  // ── FIXED: Only pause when actually sliding sections ──
+  const worldWrap = document.getElementById('world-wrap');
+  if (worldWrap) {
+    // Listen for when sliding STARTS
+    worldWrap.addEventListener('transitionstart', () => {
+      isSliding = true;
+      if (isPlaying) {
+        pause(true);  // Pause and resume bg music
+      }
+    });
+    
+    // Reset after transition ends
+    worldWrap.addEventListener('transitionend', () => {
+      isSliding = false;
+    });
+  }
 })();
