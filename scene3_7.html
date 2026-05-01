@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Scene 3.7 — Her World</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400;1,600&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="scene3_7.css" />
+</head>
+<body>
+
+  <div id="scene">
+
+    <!-- ── Sliding world wrapper ── -->
+    <!-- JS moves this via translateX to reveal each section -->
+    <div id="world-wrap">
+
+      <!-- ════════════════════════════
+           SECTION 1 — Her ❤️
+      ════════════════════════════ -->
+      <div class="world-section" id="section-1">
+        <div class="section-bg" style="background-image: url('assets/bg_her.png')"></div>
+        <div class="section-bg-overlay"></div>
+
+        <div class="section-card">
+          <p class="section-title">Her</p>
+
+          <!-- 5 polaroids: row of 3 + row of 2 -->
+          <div class="photo-grid grid-5" id="grid-1">
+            <!-- injected by JS -->
+          </div>
+
+          <p class="section-caption">"The smile that makes everything better"</p>
+
+          <div class="card-footer">
+            <button class="back-btn" id="back-1">‹</button>
+            <div class="progress-dots" id="dots-1"></div>
+            <button class="next-btn" id="btn-1">Next ›</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════
+           SECTION 2 — Her Kitchen 🍰
+      ════════════════════════════ -->
+      <div class="world-section" id="section-2">
+        <div class="section-bg" style="background-image: url('assets/bg_kitchen.png')"></div>
+        <div class="section-bg-overlay"></div>
+
+        <div class="section-card">
+          <p class="section-title">Her Kitchen</p>
+
+          <div class="photo-grid grid-3" id="grid-2">
+            <!-- injected by JS -->
+          </div>
+
+          <p class="section-caption">"She cooks with love — you can taste it"</p>
+
+          <div class="card-footer">
+            <button class="back-btn" id="back-2">‹</button>
+            <div class="progress-dots" id="dots-2"></div>
+            <button class="next-btn" id="btn-2">Next ›</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════════════════════════
+           SECTION 3 — Her Art 🎨
+      ════════════════════════════ -->
+      <div class="world-section" id="section-3">
+        <div class="section-bg" style="background-image: url('assets/bg_art.png')"></div>
+        <div class="section-bg-overlay"></div>
+
+        <div class="section-card">
+          <p class="section-title">Her Art</p>
+
+          <div class="photo-grid grid-3" id="grid-3">
+            <!-- injected by JS -->
+          </div>
+
+          <p class="section-caption">"Her art is… definitely unique"</p>
+
+          <!-- AFTER (all 3 sections — change dots/btn id numbers accordingly) -->
+          <div class="card-footer">
+            <button class="back-btn" id="back-3">‹</button>
+            <div class="progress-dots" id="dots-3"></div>
+            <button class="next-btn" id="btn-3">Finish</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /world-wrap -->
+
+  </div><!-- /scene -->
+
+  <script src="scene3_7.js"></script>
+  <script src="music.js"></script>
+</body>
+</html>
