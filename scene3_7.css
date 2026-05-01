@@ -153,8 +153,12 @@ html, body {
 
 /* 3-photo grid — single row */
 .grid-3 .polaroid {
-  width: calc(33% - 10px);
+  width: calc(45% - 8px);
 }
+
+/*.grid-3 .polaroid:nth-child(3) {
+  width: calc(40% - 8px);
+}*/
 
 /* 5-photo grid — row of 3 + row of 2 */
 .grid-5 .polaroid {
