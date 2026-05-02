@@ -9,7 +9,7 @@
   audio.id     = 'bg-music';
   audio.src    = AUDIO_SRC;
   audio.loop   = true;
-  audio.volume = 0.7; // adjust 0.0 – 1.0
+  audio.volume = 0.6; // adjust 0.0 – 1.0
   document.body.appendChild(audio);
 
   // Browsers block autoplay until user interacts.
