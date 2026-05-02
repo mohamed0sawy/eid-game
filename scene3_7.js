@@ -302,8 +302,15 @@ window.addEventListener('load', () => {
 
   // ── Pause voice if user leaves Section 2 ──────────
   // Listens for the world-wrap transition and pauses if needed
+  // FIXED — only pause if the section actually changed
+  let lastSection = 0;
+
   document.getElementById('world-wrap').addEventListener('transitionend', () => {
-    if (isPlaying) pause();
+    if (isPlaying && currentSection !== lastSection) {
+      lastSection = currentSection;
+      pause();
+    }
+    lastSection = currentSection;
   });
 
 })();

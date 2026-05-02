@@ -337,10 +337,11 @@ html, body {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: 12px 14px;
+  padding: 5px 14px;
   background: rgba(217, 196, 160, 0.15);
   border: 1px solid var(--bubble-border);
   border-radius: 14px;
+  margin-top: 19px;
 }
 
 .voice-label {
@@ -361,8 +362,8 @@ html, body {
 /* ── Play/Pause button ── */
 .voice-play-btn {
   flex-shrink: 0;
-  width: 42px;
-  height: 42px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   background: var(--btn-bg);
   border: none;
@@ -383,7 +384,7 @@ html, body {
 
 .voice-icon {
   color: #fff;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 1;
   /* Nudge play triangle visually centered */
   margin-left: 2px;
