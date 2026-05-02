@@ -248,7 +248,7 @@ window.addEventListener('load', () => {
 
     audio.play();
     isPlaying = true;
-    icon.textContent = '⏸';
+    icon.textContent = '⏸︎';
     playBtn.classList.add('playing');
     rafId = requestAnimationFrame(updateProgress);
   }
