@@ -31,8 +31,12 @@ const MESSAGE_CHUNKS = [
   {
     lines: [
       { text: "This… wasn’t part of the game.",              style: ''       },
-      { text: "If you’re here, then it’s really you.",  style: 'italic' },
-      { text: "I just wanted a moment… that’s only yours.",   style: ''       },
+      { text: "If you’re here, then it’s really you.",  style: '' },
+    ]
+  },
+  {
+    lines: [
+      { text: "I just wanted a moment… that’s only yours.",   style: 'italic'       },
       { text: "A moment that no one else gets to see.",             style: 'italic' },
     ]
   },
@@ -46,7 +50,7 @@ const MESSAGE_CHUNKS = [
     lines: [
       { text: "Your eyes…",                                  style: 'italic' },
       { text: "they have something special.",                style: ''       },
-      { text: "Calm… soft… and full of life.",               style: 'italic' },
+      { text: "Calm… soft… and full of life.",               style: '' },
     ]
   },
   {
@@ -59,19 +63,19 @@ const MESSAGE_CHUNKS = [
     lines: [
       { text: "And you…",                                    style: 'italic' },
       { text: "you are just… perfect in your own way.",     style: ''       },
-      { text: "Simple… real… and beautiful.",               style: 'italic' },
+      { text: "Simple… real… and beautiful.",               style: '' },
     ]
   },
   {
     lines: [
-      { text: "So this moment… is only for you.",                             style: ''       },
+      { text: "So this moment… is only for you.",                             style: 'italic'       },
       { text: "You really are something special.",                            style: 'italic' },
       { text: "Just… stay like this.",                          style: 'final'  },
     ]
   },
 ];
 
-const CHUNK_DELAY    = 5000; // ms between chunks appearing
+const CHUNK_DELAY    = 6500; // ms between chunks appearing
 const CHUNK_DURATION = 1100;  // ms for fade-in animation
 
 // Delay between each line appearing (ms)
@@ -190,7 +194,7 @@ function shiftContainerUp() {
   requestAnimationFrame(() => {
     const containerH  = chunksContainer.scrollHeight;
     const viewportH   = window.innerHeight;
-    const targetShift = Math.max(0, (containerH - viewportH * 0.55) / 2);
+    const targetShift = Math.max(0, (containerH - viewportH * 0.43) / 2);
     chunksContainer.style.transform = `translateY(-${targetShift}px)`;
   });
 }
