@@ -47,9 +47,9 @@ const MESSAGE_LINES = [
   { text: "you are just… perfect in your own way.",     style: ''       },
   { text: "Simple… real… and beautiful.",               style: 'italic' },
   null, // spacer
-  { text: "So this moment…",                             style: ''       },
-  { text: "is only for you.",                            style: 'italic' },
-  { text: "Happy Eid, Mariam.",                          style: 'final'  },
+  { text: "So this moment… is only for you.",                             style: ''       },
+  { text: "You really are something special.",                            style: 'italic' },
+  { text: "Just… stay like this.",                          style: 'final'  },
 ];
 
 // ── Scroll settings ────────────────────────────
