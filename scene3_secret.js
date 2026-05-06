@@ -21,8 +21,8 @@ const MESSAGE_LINES = [
   { text: "And you…",                                  style: 'italic' },
   { text: "you are just… perfect in your own way.",   style: ''       },
   { text: "Simple… real… and beautiful.",             style: 'italic' },
-  { text: "So this moment… is only for you.",        style: ''       },
-  { text: "You really are something special, Mariom.", style: 'italic'  },
+  { text: "So this moment… is only for you.",         style: ''       },
+  { text: "You really are something special.",         style: 'italic'  },
   { text: "Just… stay like this.",                     style: 'final'  },
 ];
 
@@ -57,7 +57,9 @@ function startSecret() {
   secretMusic.play().catch(() => {});
 
   // Start video
-  video.play().catch(() => {});
+  setTimeout(() => {
+    video.play().catch(() => {});
+  }, 1200);
 
   // Listen for video end
   video.addEventListener('ended', onVideoEnd, { once: true });
