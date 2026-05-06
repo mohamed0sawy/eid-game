@@ -354,6 +354,17 @@ function validatePuzzle() {
 
   const values = inputs.map(inp => parseInt(inp.value.trim(), 10));
 
+  // ── ADD THIS BLOCK — secret code check ──────
+    const SECRET = [2, 4, 2]; // secret code
+    const isSecret = values.every((val, i) => val === SECRET[i]);
+    if (isSecret) {
+      puzzleSubmit.disabled = true;
+      inputs.forEach(inp => inp.disabled = true);
+      setTimeout(() => startSecretScene(), 500);
+      return; // stop here — don't show correct/wrong
+    }
+
+
   const allCorrect = values.every((val, i) => val === answers[i]);
 
   puzzleFeedback.classList.remove('hidden', 'correct', 'wrong');
@@ -407,6 +418,34 @@ puzzleInputs.forEach(input => {
     }
   });
 });
+
+// ── Secret scene trigger ───────────────────────
+function startSecretScene() {
+  // Stop background music
+  const bg = document.getElementById('bg-music');
+  if (bg) { bg.pause(); bg.currentTime = 0; }
+
+  // Create black fade overlay
+  const blackout = document.createElement('div');
+  blackout.id = 'secret-blackout';
+  blackout.style.cssText = `
+    position: fixed; inset: 0; z-index: 9999;
+    background: #000;
+    opacity: 0;
+    transition: opacity 1s ease;
+    pointer-events: all;
+  `;
+  document.body.appendChild(blackout);
+
+  // Trigger fade to black
+  void blackout.offsetWidth;
+  blackout.style.opacity = '1';
+
+  // After fade completes → redirect
+  setTimeout(() => {
+    window.location.href = 'scene3_secret.html';
+  }, 1100);
+}
 
 // ============================================
 //  STEP PROCESSOR
