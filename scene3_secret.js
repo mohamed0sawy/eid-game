@@ -53,7 +53,7 @@ window.addEventListener('load', () => {
 
 function startSecret() {
   // Start secret music softly
-  secretMusic.volume = 0.75;
+  secretMusic.volume = 0.95;
   secretMusic.play().catch(() => {});
 
   // Start video
