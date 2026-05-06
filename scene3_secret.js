@@ -6,89 +6,70 @@
 // ── Message lines ─────────────────────────────
 // Each object: { text, style }
 // style: '' | 'italic' | 'name' | 'final'
+//const MESSAGE_LINES = [
+//  { text: "This… wasn’t part of the game.",          style: ''       },
+//  { text: "If you’re here, then it’s really you.", style: 'italic' },
+//  { text: "I just wanted a moment… that’s only yours.", style: ''       },
+//  { text: "A moment that no one else gets to see.",           style: 'italic' },
+//  { text: "Mariam…",                                   style: 'name'   },
+//  { text: "You’re more beautiful than any moment I could ever create.",   style: ''       },
+//  { text: "Your eyes…",                                style: 'italic' },
+//  { text: "they have something special.",              style: ''       },
+//  { text: "Calm… soft… and full of life.",             style: 'italic' },
+//  { text: "I can't really explain it…",               style: ''       },
+//  { text: "but they make everything feel better.",     style: ''       },
+//  { text: "And you…",                                  style: 'italic' },
+//  { text: "you are just… perfect in your own way.",   style: ''       },
+//  { text: "Simple… real… and beautiful.",             style: 'italic' },
+//  { text: "So this moment… is only for you.",         style: ''       },
+//  { text: "You really are something special.",         style: 'italic'  },
+//  { text: "Just… stay like this.",                     style: 'final'  },
+//];
+
+// ── Message lines (flat, no chunks) ───────────
 const MESSAGE_LINES = [
-  { text: "This… wasn’t part of the game.",          style: ''       },
-  { text: "If you’re here, then it’s really you.", style: 'italic' },
-  { text: "I just wanted a moment… that’s only yours.", style: ''       },
-  { text: "A moment that no one else gets to see.",           style: 'italic' },
-  { text: "Mariam…",                                   style: 'name'   },
-  { text: "You’re more beautiful than any moment I could ever create.",   style: ''       },
-  { text: "Your eyes…",                                style: 'italic' },
-  { text: "they have something special.",              style: ''       },
-  { text: "Calm… soft… and full of life.",             style: 'italic' },
-  { text: "I can't really explain it…",               style: ''       },
-  { text: "but they make everything feel better.",     style: ''       },
-  { text: "And you…",                                  style: 'italic' },
-  { text: "you are just… perfect in your own way.",   style: ''       },
-  { text: "Simple… real… and beautiful.",             style: 'italic' },
-  { text: "So this moment… is only for you.",         style: ''       },
-  { text: "You really are something special.",         style: 'italic'  },
-  { text: "Just… stay like this.",                     style: 'final'  },
+  { text: "This… wasn’t part of the game.",              style: ''       },
+  { text: "If you’re here, then it’s really you.",  style: 'italic' },
+  { text: "I just wanted a moment… that’s only yours.",   style: ''       },
+  { text: "A moment that no one else gets to see.",             style: 'italic' },
+  null, // spacer
+  { text: "Mariam…",                                     style: 'name'   },
+  { text: "You’re more beautiful than any moment I could ever create.",     style: ''       },
+  null, // spacer
+  { text: "Your eyes…",                                  style: 'italic' },
+  { text: "they have something special.",                style: ''       },
+  { text: "Calm… soft… and full of life.",               style: 'italic' },
+  null, // spacer
+  { text: "I can't really explain it…",                 style: ''       },
+  { text: "but they make everything feel better.",       style: ''       },
+  null, // spacer
+  { text: "And you…",                                    style: 'italic' },
+  { text: "you are just… perfect in your own way.",     style: ''       },
+  { text: "Simple… real… and beautiful.",               style: 'italic' },
+  null, // spacer
+  { text: "So this moment…",                             style: ''       },
+  { text: "is only for you.",                            style: 'italic' },
+  { text: "Happy Eid, Mariam.",                          style: 'final'  },
 ];
 
-// REMOVE the old MESSAGE_LINES array and replace with:
-const MESSAGE_CHUNKS = [
-  {
-    lines: [
-      { text: "This… wasn’t part of the game.",              style: ''       },
-      { text: "If you’re here, then it’s really you.",  style: '' },
-    ]
-  },
-  {
-    lines: [
-      { text: "I just wanted a moment… that’s only yours.",   style: 'italic'       },
-      { text: "A moment that no one else gets to see.",             style: 'italic' },
-    ]
-  },
-  {
-    lines: [
-      { text: "Mariam…",                                     style: 'name'   },
-      { text: "You’re more beautiful than any moment I could ever create.",     style: ''       },
-    ]
-  },
-  {
-    lines: [
-      { text: "Your eyes…",                                  style: 'italic' },
-      { text: "they have something special.",                style: ''       },
-      { text: "Calm… soft… and full of life.",               style: '' },
-    ]
-  },
-  {
-    lines: [
-      { text: "I can't really explain it…",                 style: ''       },
-      { text: "but they make everything feel better.",       style: ''       },
-    ]
-  },
-  {
-    lines: [
-      { text: "And you…",                                    style: 'italic' },
-      { text: "you are just… perfect in your own way.",     style: ''       },
-      { text: "Simple… real… and beautiful.",               style: '' },
-    ]
-  },
-  {
-    lines: [
-      { text: "So this moment… is only for you.",                             style: 'italic'       },
-      { text: "You really are something special.",                            style: 'italic' },
-      { text: "Just… stay like this.",                          style: 'final'  },
-    ]
-  },
-];
+// ── Scroll settings ────────────────────────────
+const SCROLL_PX_PER_FRAME = 0.55;   // base speed — lower = slower
+const SLOWDOWN_ZONE_PX    = 120;    // how many px from end to start slowing
+const SLOWDOWN_FACTOR     = 0.3;    // speed multiplier in slowdown zone
 
-const CHUNK_DELAY    = 6500; // ms between chunks appearing
-const CHUNK_DURATION = 1100;  // ms for fade-in animation
+// ── Scroll state ───────────────────────────────
+let currentY      = 0;   // current translateY of track (starts positive = below)
+let targetY       = 0;   // final resting translateY
+let rafId         = null;
+let scrollDone    = false;
 
-// Delay between each line appearing (ms)
-const LINE_DELAY    = 2500;
-// Duration of each fade-in animation (ms) — matches CSS
-const LINE_DURATION = 1100;
 
 // ── DOM refs ──────────────────────────────────
 const secretScene   = document.getElementById('secret-scene');
 const video         = document.getElementById('secret-video');
 const videoOverlay  = document.getElementById('video-overlay');
 const messageWrap   = document.getElementById('message-wrap');
-const chunksContainer = document.getElementById('chunks-container');
+const messageTrack = document.getElementById('message-track');
 const continueBtn   = document.getElementById('continue-btn');
 const secretMusic   = document.getElementById('secret-music');
 
@@ -134,70 +115,123 @@ function onVideoEnd() {
 }
 
 // ============================================
-//  MESSAGE SYSTEM
+//  BUILD MESSAGE TRACK
+// ============================================
+
+function buildMessageTrack() {
+  messageTrack.innerHTML = '';
+
+  MESSAGE_LINES.forEach(line => {
+    if (line === null) {
+      // Spacer between groups
+      const spacer = document.createElement('div');
+      spacer.className = 'msg-spacer';
+      messageTrack.appendChild(spacer);
+      return;
+    }
+
+    const p = document.createElement('p');
+    p.className = `msg-line ${line.style}`.trim();
+    p.textContent = line.text;
+    messageTrack.appendChild(p);
+  });
+}
+
+// ============================================
+//  SHOW MESSAGE — entry point (replaces old showMessage)
 // ============================================
 
 function showMessage() {
+  buildMessageTrack();
   messageWrap.classList.remove('hidden');
-  chunksContainer.innerHTML = '';
 
-  MESSAGE_CHUNKS.forEach((chunk, chunkIndex) => {
-    const delay = chunkIndex * CHUNK_DELAY;
+  const vh = window.innerHeight;
 
-    setTimeout(() => {
-      // ── Build chunk element ──────────────────
-      const chunkEl = document.createElement('div');
-      chunkEl.className = 'msg-chunk'; // starts opacity:0
+  // Start position: top of track sits at bottom of viewport
+  // so content scrolls up naturally into view
+  currentY = vh * 0.85;
+  messageTrack.style.transform = `translateY(${currentY}px)`;
 
-      chunk.lines.forEach(line => {
-        const p = document.createElement('p');
-        p.className = `msg-line ${line.style}`.trim();
-        p.textContent = line.text;
-        chunkEl.appendChild(p);
-      });
+  // Target: last line rests ~30% below center
+  // We want the bottom of the track to stop at 65% down the screen
+  const trackH = messageTrack.scrollHeight;
+  targetY = -(trackH - vh * 0.65);
 
-      chunksContainer.appendChild(chunkEl);
+  // Small delay so overlay settles before scroll starts
+  setTimeout(() => startAutoScroll(), 600);
+}
 
-      // ── Trigger fade-in on next frame ────────
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          chunkEl.classList.add('active');
-        });
-      });
+// ============================================
+//  AUTO SCROLL — rAF loop
+// ============================================
 
-      // ── Dim previous chunks ──────────────────
-      const allChunks = chunksContainer.querySelectorAll('.msg-chunk');
-      allChunks.forEach((el, i) => {
-        const age = allChunks.length - 1 - i; // 0 = newest
-        el.classList.remove('active', 'dim-1', 'dim-2');
-        if (age === 0) el.classList.add('active');
-        else if (age === 1) el.classList.add('dim-1');
-        else el.classList.add('dim-2');
-      });
+function startAutoScroll() {
+  function step() {
+    if (scrollDone) return;
 
-      // ── Push container up so new chunk centers ─
-      shiftContainerUp();
+    const distanceLeft = currentY - targetY;
 
-      // ── Show continue after last chunk ───────
-      const isLast = chunkIndex === MESSAGE_CHUNKS.length - 1;
-      if (isLast) {
-        setTimeout(() => showContinueBtn(), CHUNK_DURATION + 1000);
+    // Determine speed — slow down near end
+    let speed = SCROLL_PX_PER_FRAME;
+    if (distanceLeft < SLOWDOWN_ZONE_PX) {
+      // Linear ease-out in slowdown zone
+      const factor = distanceLeft / SLOWDOWN_ZONE_PX;
+      speed = SCROLL_PX_PER_FRAME * (SLOWDOWN_FACTOR + (1 - SLOWDOWN_FACTOR) * factor);
+      speed = Math.max(speed, 0.08); // never fully stop mid-scroll
+    }
+
+    if (currentY > targetY) {
+      currentY -= speed;
+      if (currentY <= targetY) {
+        currentY = targetY;
+        messageTrack.style.transform = `translateY(${currentY}px)`;
+        onScrollComplete();
+        return;
       }
+    } else {
+      onScrollComplete();
+      return;
+    }
 
-    }, delay);
-  });
+    messageTrack.style.transform = `translateY(${currentY}px)`;
+    rafId = requestAnimationFrame(step);
+  }
+
+  rafId = requestAnimationFrame(step);
 }
 
-function shiftContainerUp() {
-  // Measure how tall the container is now
-  // and offset it so the latest chunk stays near center
-  requestAnimationFrame(() => {
-    const containerH  = chunksContainer.scrollHeight;
-    const viewportH   = window.innerHeight;
-    const targetShift = Math.max(0, (containerH - viewportH * 0.43) / 2);
-    chunksContainer.style.transform = `translateY(-${targetShift}px)`;
-  });
+// ============================================
+//  SCROLL COMPLETE
+// ============================================
+
+function onScrollComplete() {
+  scrollDone = true;
+  cancelAnimationFrame(rafId);
+
+  // Pause before showing button
+  setTimeout(() => {
+    showContinueBtn();
+
+    // Enable manual scrolling after button appears
+    setTimeout(() => {
+      enableManualScroll();
+    }, 800);
+  }, 1000);
 }
+
+function enableManualScroll() {
+  // Switch message-wrap to scrollable
+  messageWrap.classList.add('scrollable');
+
+  // Sync native scroll position to where rAF left off
+  // so there's no jump when taking over
+  messageWrap.scrollTop = -targetY + window.innerHeight * 0.85
+                          - messageWrap.clientHeight * 0.85;
+  messageTrack.style.transform = 'translateY(0)';
+  messageTrack.style.paddingTop =
+    `${window.innerHeight * 0.85}px`;
+}
+
 
 // ============================================
 //  CONTINUE BUTTON
