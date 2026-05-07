@@ -53,7 +53,7 @@ const MESSAGE_LINES = [
 ];
 
 // ── Scroll settings ────────────────────────────
-const SCROLL_PX_PER_FRAME = 0.27;   // base speed — lower = slower
+const SCROLL_PX_PER_FRAME = 0.29;   // base speed — lower = slower
 const SLOWDOWN_ZONE_PX    = 70;    // how many px from end to start slowing
 const SLOWDOWN_FACTOR     = 0.3;    // speed multiplier in slowdown zone
 
