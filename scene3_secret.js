@@ -53,8 +53,8 @@ const MESSAGE_LINES = [
 ];
 
 // ── Scroll settings ────────────────────────────
-const SCROLL_PX_PER_FRAME = 0.25;   // base speed — lower = slower
-const SLOWDOWN_ZONE_PX    = 120;    // how many px from end to start slowing
+const SCROLL_PX_PER_FRAME = 0.27;   // base speed — lower = slower
+const SLOWDOWN_ZONE_PX    = 70;    // how many px from end to start slowing
 const SLOWDOWN_FACTOR     = 0.3;    // speed multiplier in slowdown zone
 
 // ── Scroll state ───────────────────────────────
@@ -155,7 +155,7 @@ function showMessage() {
   // Target: last line rests ~30% below center
   // We want the bottom of the track to stop at 65% down the screen
   const trackH = messageTrack.scrollHeight;
-  targetY = -(trackH - vh * 0.65);
+  targetY = -(trackH - vh * 0.80);
 
   // Small delay so overlay settles before scroll starts
   setTimeout(() => startAutoScroll(), 600);
