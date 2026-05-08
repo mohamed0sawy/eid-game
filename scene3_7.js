@@ -30,6 +30,7 @@ const SECTIONS = [
       'assets/dessert_1.png',
       'assets/dessert_2.jpg',
       'assets/dessert_3.jpg',
+      'assets/dessert_4.jpg',
     ],
     caption: "She cooks with love — you can taste it 😍",
     gridId:  'grid-2',

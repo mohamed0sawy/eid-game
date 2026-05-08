@@ -47,8 +47,22 @@ const MESSAGE_LINES = [
   { text: "you are just… perfect in your own way.",     style: ''       },
   { text: "Simple… real… and beautiful.",               style: 'italic' },
   null, // spacer
-  { text: "So this moment… is only for you.",                             style: ''       },
-  { text: "You really are something special.",                            style: 'italic' },
+  { text: "Even on the days we don’t understand each other…", style: '' },
+  { text: "I would still choose you in the end.",       style: 'italic' },
+  null, // spacer
+  { text: "It wasn’t because I was lonely…",            style: '' },
+  { text: "I was already at peace in my own world.",    style: '' },
+  null, // spacer
+  { text: "But then you appeared like a comet",         style: 'italic' },
+  { text: "crossing my night sky.",                     style: 'italic' },
+  null, // spacer
+  { text: "Your presence was more than just a spark…", style: '' },
+  { text: "you made everything brighter.",              style: '' },
+  null, // spacer
+  { text: "Even stars fade someday…",                   style: 'italic' },
+  { text: "but some feelings never really disappear.",  style: 'italic' },
+  null, // spacer
+  { text: "You really are something special.",              style: 'italic' },
   { text: "Just… stay like this.",                          style: 'final'  },
 ];
 
