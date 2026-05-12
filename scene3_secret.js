@@ -43,6 +43,11 @@ const MESSAGE_LINES = [
   { text: "I can't really explain it…",                 style: ''       },
   { text: "but they make everything feel better.",       style: ''       },
   null, // spacer
+  { text: "And somehow…", style: '' },
+  { text: "your voice became my favorite sound.", style: '' },
+  null, // spacer
+  { text: "Even silence feels better with you in it.", style: 'italic' },
+  null, // spacer
   { text: "And you…",                                    style: 'italic' },
   { text: "you are just… perfect in your own way.",     style: ''       },
   { text: "Simple… real… and beautiful.",               style: 'italic' },
@@ -59,11 +64,17 @@ const MESSAGE_LINES = [
   { text: "Your presence was more than just a spark…", style: '' },
   { text: "you made everything brighter.",              style: '' },
   null, // spacer
+  { text: "I don’t think you realize…", style: 'italic' },
+  { text: "how much the little moments with you mean to me.", style: 'italic' },
+  null, // spacer
+  { text: "Somehow…", style: '' },
+  { text: "you became my favorite part of every day.", style: '' },
+  null, // spacer
   { text: "Even stars fade someday…",                   style: 'italic' },
   { text: "but some feelings never really disappear.",  style: 'italic' },
   null, // spacer
   { text: "You really are something special.",              style: 'italic' },
-  { text: "Just… stay like this.",                          style: 'final'  },
+  { text: "I hope life never takes this softness away from you.",  style: 'final'  },
 ];
 
 // ── Scroll settings ────────────────────────────
