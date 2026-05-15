@@ -143,10 +143,68 @@
           <div class="card-footer">
             <button class="back-btn" id="back-3">‹</button>
             <div class="progress-dots" id="dots-3"></div>
-            <button class="next-btn" id="btn-3">Finish</button>
+            <button class="next-btn" id="btn-3">Next ›</button>
           </div>
         </div>
       </div>
+
+
+        <!-- ════════════════════════════
+       SECTION 4 — Her Voice 🎙️
+        ════════════════════════════ -->
+        <div class="world-section" id="section-4">
+            <div class="section-bg" style="background-image: url('assets/bg_voice.png')"></div>
+            <div class="section-bg-overlay"></div>
+
+            <div class="section-card voice-card">
+                <p class="section-title">Her Voice</p>
+
+                <!-- Top quote -->
+                <p class="voice-quote">"Some voices just stay with you."</p>
+
+                <!-- Portrait -->
+                <div class="voice-portrait-wrap" id="voice-portrait-wrap">
+                    <div class="voice-bloom"></div>
+                    <div class="voice-aura-ring"></div>
+                    <img
+                            id="voice-portrait"
+                            class="voice-portrait"
+                            src="assets/mariam_portrait.jpg"
+                            alt="Mariam"
+                            onerror="this.style.opacity='0.3'"
+                    />
+                </div>
+
+                <!-- Custom audio player -->
+                <div class="voice-player" id="voice-player-4">
+                    <button class="voice-btn" id="vbtn-4" aria-label="Play">
+                        <span class="vbtn-icon" id="vicon-4">▶</span>
+                    </button>
+                    <div class="voice-bar-wrap">
+                        <div class="voice-bar-track" id="vtrack-4">
+                            <div class="voice-bar-fill" id="vfill-4"></div>
+                        </div>
+                        <div class="voice-time-wrap">
+                            <span class="voice-time" id="vtime-current-4">0:00</span>
+                            <span class="voice-time-sep">·</span>
+                            <span class="voice-time" id="vtime-total-4">0:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hidden audio -->
+                <audio id="voice-audio-4" src="assets/mariam_singing.mp3" preload="metadata"></audio>
+
+                <!-- Footer -->
+                <div class="card-footer">
+                    <button class="back-btn" id="back-4">‹</button>
+                    <div class="progress-dots" id="dots-4" style="margin: 0vw 12vw"></div>
+                    <button class="next-btn" id="btn-4">Finish</button>
+                </div>
+
+            </div>
+        </div>
+        <!-- end section-4 -->
 
     </div><!-- /world-wrap -->
 

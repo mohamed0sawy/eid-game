@@ -51,7 +51,17 @@ const SECTIONS = [
     dotsId:  'dots-3',
     btnId:   'btn-3',
     backId:  'back-3',
-    isLast:  true,
+  },
+  {
+    id:      4,
+    title:   "Her Voice 🎙️",
+    photos:  [],           // no polaroids — portrait handled in HTML
+    caption: '',           // no grid caption — quote handled in HTML
+    gridId:  'grid-4',    // safe to leave — grid won't render (empty photos)
+    dotsId:  'dots-4',
+    btnId:   'btn-4',
+    backId:  'back-4',
+    isLast:  true,         // ← move isLast from section 3 to section 4
   },
 ];
 
@@ -348,4 +358,143 @@ window.addEventListener('load', () => {
       }, 400);
     }
   });
+})();
+
+// ══════════════════════════════════════════════
+//  SECTION 4 — Voice Player
+// ══════════════════════════════════════════════
+(function initVoiceSection4() {
+  const audio        = document.getElementById('voice-audio-4');
+  const btn          = document.getElementById('vbtn-4');
+  const icon         = document.getElementById('vicon-4');
+  const fill         = document.getElementById('vfill-4');
+  const track        = document.getElementById('vtrack-4');
+  const timeCurrent  = document.getElementById('vtime-current-4');
+  const timeTotal    = document.getElementById('vtime-total-4');
+  const portraitWrap = document.getElementById('voice-portrait-wrap');
+
+  if (!audio || !btn) return;
+
+  let isPlaying = false;
+  let rafId     = null;
+
+  // ── Helpers ─────────────────────────────────
+  function getBg() { return document.getElementById('bg-music'); }
+
+  function formatTime(s) {
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return `${m}:${sec.toString().padStart(2, '0')}`;
+  }
+
+  function updateProgress() {
+    if (!audio.duration) return;
+    const pct = (audio.currentTime / audio.duration) * 100;
+    fill.style.width = pct + '%';
+    timeCurrent.textContent = formatTime(audio.currentTime);
+    if (isPlaying) rafId = requestAnimationFrame(updateProgress);
+  }
+
+  // ── Fade bg music helpers ────────────────────
+  function fadeBgOut(duration) {
+    const bg = getBg();
+    if (!bg || bg.paused) return;
+    const steps    = 25;
+    const interval = duration / steps;
+    const decrement = bg.volume / steps;
+    const timer = setInterval(() => {
+      if (bg.volume > decrement) {
+        bg.volume -= decrement;
+      } else {
+        bg.volume = 0;
+        bg.pause();
+        clearInterval(timer);
+      }
+    }, interval);
+  }
+
+  function fadeBgIn(duration) {
+    const bg = getBg();
+    if (!bg) return;
+    bg.volume = 0;
+    bg.play().catch(() => {});
+    const targetVol = 0.4;
+    const steps    = 25;
+    const interval = duration / steps;
+    const increment = targetVol / steps;
+    const timer = setInterval(() => {
+      if (bg.volume < targetVol - increment) {
+        bg.volume += increment;
+      } else {
+        bg.volume = targetVol;
+        clearInterval(timer);
+      }
+    }, interval);
+  }
+
+  // ── Metadata loaded ──────────────────────────
+  audio.addEventListener('loadedmetadata', () => {
+    timeTotal.textContent = formatTime(audio.duration);
+  });
+
+  // ── Play ─────────────────────────────────────
+  function play() {
+    fadeBgOut(1200);
+    if (audio.ended) { audio.currentTime = 0; fill.style.width = '0%'; }
+    audio.play().then(() => {
+      isPlaying = true;
+      icon.textContent = '⏸';
+      btn.classList.add('playing');
+      portraitWrap.classList.add('playing');
+      rafId = requestAnimationFrame(updateProgress);
+    }).catch(() => {});
+  }
+
+  // ── Pause ────────────────────────────────────
+  function pause() {
+    audio.pause();
+    isPlaying = false;
+    icon.textContent = '▶';
+    btn.classList.remove('playing');
+    portraitWrap.classList.remove('playing');
+    cancelAnimationFrame(rafId);
+    fadeBgIn(1200);
+  }
+
+  // ── Toggle ───────────────────────────────────
+  btn.addEventListener('click', () => {
+    isPlaying ? pause() : play();
+  });
+
+  // ── Ended ────────────────────────────────────
+  audio.addEventListener('ended', () => {
+    isPlaying = false;
+    icon.textContent = '▶';
+    btn.classList.remove('playing');
+    portraitWrap.classList.remove('playing');
+    fill.style.width = '0%';
+    timeCurrent.textContent = '0:00';
+    cancelAnimationFrame(rafId);
+    fadeBgIn(1500);
+  });
+
+  // ── Seek ─────────────────────────────────────
+  track.addEventListener('click', (e) => {
+    if (!audio.duration) return;
+    const rect = track.getBoundingClientRect();
+    const pct  = Math.min(1, Math.max(0, (e.clientX - rect.left) / rect.width));
+    audio.currentTime = pct * audio.duration;
+    fill.style.width  = (pct * 100) + '%';
+    timeCurrent.textContent = formatTime(audio.currentTime);
+  });
+
+  // ── Pause if user navigates away from section 4 ──
+  let lastSectionSnapshot = currentSection;
+  document.getElementById('world-wrap').addEventListener('transitionend', () => {
+    if (isPlaying && currentSection !== lastSectionSnapshot) {
+      pause();
+    }
+    lastSectionSnapshot = currentSection;
+  });
+
 })();
