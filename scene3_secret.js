@@ -48,6 +48,12 @@ const MESSAGE_LINES = [
   null, // spacer
   { text: "Even silence feels better with you in it.", style: 'italic' },
   null, // spacer
+  { text: "When the world gets quiet at night…", style: '' },
+  { text: "my thoughts always find their way back to you.", style: '' },
+  null,
+  { text: "You’re usually my last thought before sleep…", style: '' },
+  { text: "and somehow my first thought in the morning too.", style: '' },
+  null,
   { text: "And you…",                                    style: 'italic' },
   { text: "you are just… perfect in your own way.",     style: ''       },
   { text: "Simple… real… and beautiful.",               style: 'italic' },
@@ -78,7 +84,7 @@ const MESSAGE_LINES = [
 ];
 
 // ── Scroll settings ────────────────────────────
-const SCROLL_PX_PER_FRAME = 0.3;   // base speed — lower = slower
+const SCROLL_PX_PER_FRAME = 3;   // base speed — lower = slower
 const SLOWDOWN_ZONE_PX    = 30;    // how many px from end to start slowing
 const SLOWDOWN_FACTOR     = 0.3;    // speed multiplier in slowdown zone
 

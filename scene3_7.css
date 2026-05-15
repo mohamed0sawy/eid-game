@@ -412,3 +412,125 @@ html, body {
   border-radius: 99px;
   transition: width 0.25s linear;
 }
+
+/* ── Hidden Sketchbook (Section 3 only) ─────── */
+
+.sketchbook-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Soft follow-up line */
+.sketchbook-tease {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(12px, 1.7vw, 14px);
+  color: var(--text-color);
+  opacity: 0.6;
+  text-align: center;
+}
+
+/* ── Trigger button ─────────────────────────── */
+.sketchbook-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: none;
+  border: 1.5px solid var(--bubble-border);
+  border-radius: 99px;
+  padding: 8px 20px;
+  cursor: pointer;
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(12px, 1.6vw, 14px);
+  color: var(--btn-bg);
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.sketchbook-trigger:active {
+  transform: scale(0.96);
+  background: rgba(193, 105, 79, 0.06);
+}
+
+.sketchbook-trigger-icon {
+  font-size: 10px;
+  opacity: 0.55;
+  color: var(--btn-bg);
+}
+
+/* ── Expandable content ─────────────────────── */
+.sketchbook-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+}
+
+/* Inner wrapper needed for grid-template-rows trick */
+.sketchbook-content > * {
+  overflow: hidden;
+}
+
+.sketchbook-content.open {
+  grid-template-rows: 1fr;
+}
+
+/* ── Inner wrapper ──────────────────────────── */
+.sketchbook-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 14px 4px 4px;
+  width: 100%;
+}
+
+/* ── Refined polaroid (less tilt, cleaner) ───── */
+.sketch-polaroid {
+  background: #FEFCF7;  /* slightly brighter than regular polaroids */
+  padding: 8px 8px 20px 8px;
+  border-radius: 3px;
+  box-shadow:
+    0 3px 12px rgba(80, 40, 10, 0.12),
+    0 1px 3px  rgba(80, 40, 10, 0.07);
+  transform: rotate(var(--sketch-rotate));
+
+  /* Starts hidden — animated in when revealed */
+  opacity: 0;
+  translate: 0 10px;
+  transition:
+    opacity   0.6s ease var(--sketch-delay),
+    translate 0.6s ease var(--sketch-delay);
+}
+
+/* Activated when parent is open */
+.sketchbook-content.open .sketch-polaroid {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.sketch-polaroid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+  border-radius: 1px;
+}
+
+/* ── Closing caption ────────────────────────── */
+.sketchbook-closing {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(12px, 1.6vw, 14px);
+  color: var(--btn-bg);
+  text-align: center;
+  padding: 10px 8px 6px;
+  opacity: 0;
+  transition: opacity 0.6s ease 0.6s;
+}
+
+.sketchbook-content.open .sketchbook-closing {
+  opacity: 1;
+}

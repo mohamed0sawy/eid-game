@@ -315,3 +315,37 @@ window.addEventListener('load', () => {
   });
 
 })();
+
+// ── Hidden Sketchbook toggle (Section 3) ──────
+(function initSketchbook() {
+  const trigger  = document.getElementById('sketchbook-trigger');
+  const content  = document.getElementById('sketchbook-content');
+  const label    = document.getElementById('sketchbook-label');
+
+  if (!trigger || !content) return;
+
+  // Wrap inner content for grid-template-rows animation
+  // (requires a single direct child with overflow:hidden)
+  const inner = document.createElement('div');
+  inner.style.overflow = 'hidden';
+  while (content.firstChild) inner.appendChild(content.firstChild);
+  content.appendChild(inner);
+
+  let isOpen = false;
+
+  trigger.addEventListener('click', () => {
+    isOpen = !isOpen;
+
+    content.classList.toggle('open', isOpen);
+    label.textContent = isOpen
+      ? 'Hide sketchbook'
+      : 'Open the hidden sketchbook';
+
+    // Scroll card into view smoothly if expanding
+    if (isOpen) {
+      setTimeout(() => {
+        content.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 400);
+    }
+  });
+})();

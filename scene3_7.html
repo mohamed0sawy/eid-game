@@ -98,6 +98,47 @@
 
           <p class="section-caption">"Her art is… definitely unique"</p>
 
+
+            <!-- ADD THIS BLOCK right after the caption -->
+            <div class="sketchbook-wrap" id="sketchbook-wrap">
+
+                <!-- Soft follow-up line -->
+                <p class="sketchbook-tease">But honestly… there’s real talent hidden here too.</p>
+
+                <!-- Expandable trigger -->
+                <button class="sketchbook-trigger" id="sketchbook-trigger">
+                    <span class="sketchbook-trigger-icon">✦</span>
+                    <span class="sketchbook-trigger-label" id="sketchbook-label">Open the hidden sketchbook</span>
+                    <span class="sketchbook-trigger-icon">✦</span>
+                </button>
+
+                <!-- Hidden content — expands on click -->
+                <div class="sketchbook-content" id="sketchbook-content">
+                    <div class="sketchbook-grid">
+
+                        <div class="sketch-polaroid" style="--sketch-rotate: -2deg; --sketch-delay: 0.05s">
+                            <img src="assets/real_art_1.png" alt="drawing" onerror="this.style.display='none'" />
+                        </div>
+
+                        <div class="sketch-polaroid" style="--sketch-rotate: 1.5deg; --sketch-delay: 0.2s">
+                            <img src="assets/real_art_2.png" alt="drawing" onerror="this.style.display='none'" />
+                        </div>
+
+                        <div class="sketch-polaroid" style="--sketch-rotate: -1deg; --sketch-delay: 0.35s">
+                            <img src="assets/real_art_3.png" alt="drawing" onerror="this.style.display='none'" />
+                        </div>
+
+                        <div class="sketch-polaroid" style="--sketch-rotate: 2deg; --sketch-delay: 0.5s">
+                            <img src="assets/real_art_4.jpg" alt="drawing" onerror="this.style.display='none'" />
+                        </div>
+
+                    </div>
+
+                    <p class="sketchbook-closing">"Told you… she's something else ❤️"</p>
+                </div>
+
+            </div>
+
           <!-- AFTER (all 3 sections — change dots/btn id numbers accordingly) -->
           <div class="card-footer">
             <button class="back-btn" id="back-3">‹</button>
