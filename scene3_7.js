@@ -9,22 +9,6 @@
 const SECTIONS = [
   {
     id:      1,
-    title:   "Her ❤️",
-    photos:  [
-      'assets/her_1.jpg',
-      'assets/her_2.jpg',
-      'assets/her_3.jpg',
-      'assets/her_4.jpg',
-      'assets/her_5.jpg',
-    ],
-    caption: "The smile that makes everything better ❤️",
-    gridId:  'grid-1',
-    dotsId:  'dots-1',
-    btnId:   'btn-1',
-    backId:  'back-1',
-  },
-  {
-    id:      2,
     title:   "Her Kitchen 🍰",
     photos:  [
       'assets/dessert_1.png',
@@ -33,13 +17,13 @@ const SECTIONS = [
       'assets/dessert_4.jpg',
     ],
     caption: "She cooks with love — you can taste it 😍",
-    gridId:  'grid-2',
-    dotsId:  'dots-2',
-    btnId:   'btn-2',
-    backId:  'back-2',
+    gridId:  'grid-1',
+    dotsId:  'dots-1',
+    btnId:   'btn-1',
+    backId:  'back-1',
   },
   {
-    id:      3,
+    id:      2,
     title:   "Her Art 🎨",
     photos:  [
       'assets/art_1.jpg',
@@ -47,22 +31,38 @@ const SECTIONS = [
       'assets/art_3.jpg',
     ],
     caption: "She creates beauty everywhere she goes 🎨",
-    gridId:  'grid-3',
+    gridId:  'grid-2',
+    dotsId:  'dots-2',
+    btnId:   'btn-2',
+    backId:  'back-2',
+  },
+  {
+    id:      3,
+    title:   "Her Voice 🎙️",
+    photos:  [],           // no polaroids — portrait handled in HTML
+    caption: '',           // no grid caption — quote handled in HTML
+    gridId:  'grid-3',    // safe to leave — grid won't render (empty photos)
     dotsId:  'dots-3',
     btnId:   'btn-3',
     backId:  'back-3',
   },
   {
-    id:      4,
-    title:   "Her Voice 🎙️",
-    photos:  [],           // no polaroids — portrait handled in HTML
-    caption: '',           // no grid caption — quote handled in HTML
-    gridId:  'grid-4',    // safe to leave — grid won't render (empty photos)
-    dotsId:  'dots-4',
-    btnId:   'btn-4',
-    backId:  'back-4',
-    isLast:  true,         // ← move isLast from section 3 to section 4
-  },
+      id:      4,
+      title:   "Her ❤️",
+      photos:  [
+        'assets/her_1.jpg',
+        'assets/her_2.jpg',
+        'assets/her_3.jpg',
+        'assets/her_4.jpg',
+        'assets/her_5.jpg',
+      ],
+      caption: "The smile that makes everything better ❤️",
+      gridId:  'grid-4',
+      dotsId:  'dots-4',
+      btnId:   'btn-4',
+      backId:  'back-4',
+    isLast:  true,
+    },
 ];
 
 const TOTAL_SECTIONS = SECTIONS.length;
@@ -85,7 +85,7 @@ const worldWrap = document.getElementById('world-wrap');
 // ============================================
 
 function buildAllGrids() {
-  let globalPhotoIndex = 0; // tracks rotation across all sections
+  let globalPhotoIndex = 0;
 
   SECTIONS.forEach(section => {
     const grid = document.getElementById(section.gridId);
@@ -95,30 +95,63 @@ function buildAllGrids() {
       const rotation = ROTATIONS[globalPhotoIndex % ROTATIONS.length];
       globalPhotoIndex++;
 
-      const polaroid = document.createElement('div');
-      polaroid.className = 'polaroid';
+      // ── Her section (id:4) gets ornament frames ──
+      if (section.id === 4) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'polaroid cinematic-portrait';
+//        wrapper.style.setProperty('--rotate', `rotate(${rotation}deg)`);
+        wrapper.style.animationDelay  = `${0.15 * i + 0.3}s`;
+        wrapper.style.transform       = `rotate(${rotation}deg)`;
 
-      // Set CSS custom property for rotation
-      // used in @keyframes polaroidDrop
-      polaroid.style.setProperty('--rotate', `rotate(${rotation}deg)`);
+        // Top ornament
+        const ornTop = document.createElement('img');
+        ornTop.src       = 'assets/ornament_top.png';
+        ornTop.className = 'portrait-ornament portrait-ornament-top';
+        ornTop.alt       = '';
+        ornTop.style.aspectRatio = '4 / 1';
 
-      // Stagger delay so photos drop in one by one
-      polaroid.style.animationDelay  = `${0.15 * i + 0.3}s`;
-      // Final resting transform (after animation ends)
-      polaroid.style.transform       = `rotate(${rotation}deg)`;
+        // Photo
+        const img = document.createElement('img');
+        img.src       = src;
+        img.alt       = section.title;
+        img.className = 'portrait-photo';
+        img.onerror   = function () {
+          this.style.display        = 'none';
+          wrapper.style.background  = '#F0E8D5';
+          wrapper.style.minHeight   = '80px';
+        };
 
-      const img = document.createElement('img');
-      img.src   = src;
-      img.alt   = section.title;
-      // Graceful fallback — show warm placeholder if image missing
-      img.onerror = function () {
-        this.style.display     = 'none';
-        polaroid.style.background = '#F0E8D5';
-        polaroid.style.minHeight  = '80px';
-      };
+         // Bottom ornament
+//        const ornBot = document.createElement('img');
+//        ornBot.src       = 'assets/ornament_bottom.png';
+//        ornBot.className = 'portrait-ornament portrait-ornament-bottom';
+//        ornBot.alt       = '';
 
-      polaroid.appendChild(img);
-      grid.appendChild(polaroid);
+        wrapper.appendChild(ornTop);
+        wrapper.appendChild(img);
+//        wrapper.appendChild(ornBot);
+        grid.appendChild(wrapper);
+
+      } else {
+        // ── All other sections — original polaroid logic ──
+        const polaroid = document.createElement('div');
+        polaroid.className = 'polaroid';
+        polaroid.style.setProperty('--rotate', `rotate(${rotation}deg)`);
+        polaroid.style.animationDelay  = `${0.15 * i + 0.3}s`;
+        polaroid.style.transform       = `rotate(${rotation}deg)`;
+
+        const img = document.createElement('img');
+        img.src   = src;
+        img.alt   = section.title;
+        img.onerror = function () {
+          this.style.display     = 'none';
+          polaroid.style.background = '#F0E8D5';
+          polaroid.style.minHeight  = '80px';
+        };
+
+        polaroid.appendChild(img);
+        grid.appendChild(polaroid);
+      }
     });
   });
 }

@@ -171,6 +171,34 @@ html, body {
   width: calc(40% - 8px);
 }
 
+/* ── Warmer atmosphere — sections 3 & 4 ──────── */
+#section-3 .section-card,
+#section-4 .section-card {
+  background: rgba(40, 20, 5, 0.52);
+  border-color: #a08b62;         /* slightly deeper warm border */
+}
+
+#section-3 .section-card .section-title,
+#section-4 .section-card .section-title {
+  color: #9a7f4e;
+}
+
+#section-3 .next-btn,
+#section-4 .next-btn {
+  background: #8a6e3d;
+}
+
+#section-3 .back-btn,
+#section-4 .back-btn {
+  color: #d8b982;
+}
+
+/* ── Warmer overlay for sections 3 & 4 ──────── */
+#section-3 .section-bg-overlay,
+#section-4 .section-bg-overlay {
+  background: rgba(40, 20, 5, 0.52); /* warmer brown-black vs default */
+}
+
 /* ── Polaroid ───────────────────────────────── */
 .polaroid {
   background: var(--polaroid-bg);
@@ -208,6 +236,19 @@ html, body {
   line-height: 1.65;
   text-align: center;
   padding: 0 8px;
+}
+
+/* ── Her section — culmination caption ───────── */
+.her-culmination-line {
+  font-family: 'Lora', Georgia, serif;
+  font-style: italic;
+  font-size: clamp(12px, 1.6vw, 15px);
+  color: #cabb6c;
+  /*opacity: 0.58;*/
+  text-align: center;
+  line-height: 1.65;
+  padding: 0 8px;
+  margin-top: -6px; /* pulls it closer to title */
 }
 
 /* ── Card footer (dots + button) ────────────── */
@@ -798,13 +839,86 @@ html, body {
   font-family: 'Nunito', sans-serif;
   font-size: 11px;
   font-weight: 700;
-  color: var(--text-color);
+  color: white;
   opacity: 0.5;
   letter-spacing: 0.03em;
 }
 
 .voice-time-sep {
   font-size: 11px;
-  color: var(--text-color);
+  color: white;
   opacity: 0.3;
+}
+
+/* ══════════════════════════════════════════════
+   HER SECTION — Cinematic portrait frames
+   with decorative ornaments
+   ══════════════════════════════════════════════ */
+
+/* Base cinematic card — replaces polaroid padding */
+#section-4 .cinematic-portrait {
+  background: none;
+  padding: 0;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  position: relative;
+  overflow: visible;
+  filter: drop-shadow(0 6px 16px rgba(100, 65, 20, 0.2));
+}
+
+/* ── Photo itself ────────────────────────────── */
+#section-4 .portrait-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 4px;
+  position: relative;
+  z-index: 2;
+
+  /* Thin warm frame border */
+  outline: 2px solid #D4BA8A;
+  outline-offset: -2px;
+
+  /* Soft inner vignette */
+  box-shadow:
+    inset 0 0 14px rgba(80, 40, 10, 0.1),
+    0 3px 10px rgba(100, 65, 20, 0.15);
+}
+
+/* ── Ornaments ───────────────────────────────── */
+.portrait-ornament {
+  display: block;
+  width: 80%;          /* relative to polaroid width */
+  max-width: 110px;
+  object-fit: contain;
+  position: relative;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+
+  /* Muted champagne tone — softens any harsh PNG color */
+  opacity: 0.72;
+  filter:
+    sepia(0.25)
+    saturate(0.7)
+    brightness(1.05);
+}
+
+.portrait-ornament-top {
+  margin-bottom: -6px; /* slightly overlaps top of photo */
+}
+
+.portrait-ornament-bottom {
+  margin-top: -6px;    /* slightly overlaps bottom of photo */
+  opacity: 0.55;       /* bottom is subtler than top */
+}
+
+/* ── Ensure no polaroid styles bleed in ─────── */
+#section-4 .cinematic-portrait::before,
+#section-4 .cinematic-portrait::after {
+  display: none;
 }

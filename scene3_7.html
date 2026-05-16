@@ -17,42 +17,18 @@
     <!-- JS moves this via translateX to reveal each section -->
     <div id="world-wrap">
 
-      <!-- ════════════════════════════
-           SECTION 1 — Her ❤️
-      ════════════════════════════ -->
-      <div class="world-section" id="section-1">
-        <div class="section-bg" style="background-image: url('assets/bg_her.png')"></div>
-        <div class="section-bg-overlay"></div>
-
-        <div class="section-card">
-          <p class="section-title">Her</p>
-
-          <!-- 5 polaroids: row of 3 + row of 2 -->
-          <div class="photo-grid grid-5" id="grid-1">
-            <!-- injected by JS -->
-          </div>
-
-          <p class="section-caption">"The smile that makes everything better"</p>
-
-          <div class="card-footer">
-            <button class="back-btn" id="back-1">‹</button>
-            <div class="progress-dots" id="dots-1"></div>
-            <button class="next-btn" id="btn-1">Next ›</button>
-          </div>
-        </div>
-      </div>
 
       <!-- ════════════════════════════
            SECTION 2 — Her Kitchen 🍰
       ════════════════════════════ -->
-      <div class="world-section" id="section-2">
+      <div class="world-section" id="section-1">
         <div class="section-bg" style="background-image: url('assets/bg_kitchen.png')"></div>
         <div class="section-bg-overlay"></div>
 
         <div class="section-card">
           <p class="section-title">Her Kitchen</p>
 
-          <div class="photo-grid grid-3" id="grid-2">
+          <div class="photo-grid grid-3" id="grid-1">
             <!-- injected by JS -->
           </div>
 
@@ -75,9 +51,9 @@
           <!-- END of addition -->
 
           <div class="card-footer">
-            <button class="back-btn" id="back-2">‹</button>
-            <div class="progress-dots" id="dots-2"></div>
-            <button class="next-btn" id="btn-2">Next ›</button>
+            <button class="back-btn" id="back-1">‹</button>
+            <div class="progress-dots" id="dots-1"></div>
+            <button class="next-btn" id="btn-1">Next ›</button>
           </div>
         </div>
       </div>
@@ -85,14 +61,14 @@
       <!-- ════════════════════════════
            SECTION 3 — Her Art 🎨
       ════════════════════════════ -->
-      <div class="world-section" id="section-3">
+      <div class="world-section" id="section-2">
         <div class="section-bg" style="background-image: url('assets/bg_art.png')"></div>
         <div class="section-bg-overlay"></div>
 
         <div class="section-card">
           <p class="section-title">Her Art</p>
 
-          <div class="photo-grid grid-3" id="grid-3">
+          <div class="photo-grid grid-3" id="grid-2">
             <!-- injected by JS -->
           </div>
 
@@ -141,9 +117,9 @@
 
           <!-- AFTER (all 3 sections — change dots/btn id numbers accordingly) -->
           <div class="card-footer">
-            <button class="back-btn" id="back-3">‹</button>
-            <div class="progress-dots" id="dots-3"></div>
-            <button class="next-btn" id="btn-3">Next ›</button>
+            <button class="back-btn" id="back-2">‹</button>
+            <div class="progress-dots" id="dots-2"></div>
+            <button class="next-btn" id="btn-2">Next ›</button>
           </div>
         </div>
       </div>
@@ -152,7 +128,7 @@
         <!-- ════════════════════════════
        SECTION 4 — Her Voice 🎙️
         ════════════════════════════ -->
-        <div class="world-section" id="section-4">
+        <div class="world-section" id="section-3">
             <div class="section-bg" style="background-image: url('assets/bg_voice.png')"></div>
             <div class="section-bg-overlay"></div>
 
@@ -160,7 +136,7 @@
                 <p class="section-title">Her Voice</p>
 
                 <!-- Top quote -->
-                <p class="voice-quote">"Some voices just stay with you."</p>
+                <p class="voice-quote" style=color:#e9db93;">"Some songs feel warmer in the right voice."</p>
 
                 <!-- Portrait -->
                 <div class="voice-portrait-wrap" id="voice-portrait-wrap">
@@ -177,7 +153,7 @@
 
                 <!-- Custom audio player -->
                 <div class="voice-player" id="voice-player-4">
-                    <button class="voice-btn" id="vbtn-4" aria-label="Play">
+                    <button class="voice-btn" id="vbtn-4" aria-label="Play" style="background:#957948;">
                         <span class="vbtn-icon" id="vicon-4">▶</span>
                     </button>
                     <div class="voice-bar-wrap">
@@ -197,14 +173,41 @@
 
                 <!-- Footer -->
                 <div class="card-footer">
-                    <button class="back-btn" id="back-4">‹</button>
-                    <div class="progress-dots" id="dots-4" style="margin: 0vw 12vw"></div>
-                    <button class="next-btn" id="btn-4">Finish</button>
+                    <button class="back-btn" id="back-3">‹</button>
+                    <div class="progress-dots" id="dots-3" style="margin: 0vw 12vw"></div>
+                    <button class="next-btn" id="btn-3">Next ›</button>
                 </div>
 
             </div>
         </div>
         <!-- end section-4 -->
+
+        <!-- ════════════════════════════
+           SECTION 1 — Her ❤️ (became last section)
+      ════════════════════════════ -->
+        <div class="world-section" id="section-4">
+            <div class="section-bg" style="background-image: url('assets/bg_her.png')"></div>
+            <div class="section-bg-overlay" style="background: rgba(40, 20, 5, 0.65);"></div>
+
+            <div class="section-card">
+                <p class="section-title">Her</p>
+                <p class="her-culmination-line">"This is the girl behind all these beautiful things."</p>
+
+
+                <!-- 5 polaroids: row of 3 + row of 2 -->
+                <div class="photo-grid grid-5" id="grid-4">
+                    <!-- injected by JS -->
+                </div>
+
+                <p class="section-caption" style=color:#e9db93;">"The smile that makes everything better"</p>
+
+                <div class="card-footer">
+                    <button class="back-btn" id="back-4">‹</button>
+                    <div class="progress-dots" id="dots-4"></div>
+                    <button class="next-btn" id="btn-4">Finish</button>
+                </div>
+            </div>
+        </div>
 
     </div><!-- /world-wrap -->
 
